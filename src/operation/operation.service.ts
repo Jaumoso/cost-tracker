@@ -10,7 +10,7 @@ import { Model } from "mongoose";
 export class OperationService {
   
 constructor(@InjectModel('Operation') private operationModel:Model<IOperation>) { }
-
+    
     async createOperation(createOperationDto: CreateOperationDto): Promise<IOperation> {
       const newOperation = await new this.operationModel(createOperationDto);
       return newOperation.save();

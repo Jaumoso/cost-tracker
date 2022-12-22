@@ -83,4 +83,5 @@ npm install class-transformer --save
 
 npm i @nestjs/mapped-types --save
 
- npm install swagger 
+npm install --save @nestjs/swagger
+
