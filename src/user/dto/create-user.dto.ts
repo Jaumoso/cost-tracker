@@ -32,6 +32,6 @@ export class CreateUserDto {
     @IsNotEmpty()
     readonly password: string;
 
-    @ApiProperty({type: mongoose.Types.ObjectId, description: 'Type: ObjectId. Relation 1 to 1 with Account'})
-    account: mongoose.Types.ObjectId;
+    @ApiProperty({ type: [mongoose.Types.ObjectId], description: 'Array of type: ObjectId. Relation 1 user to many accounts.'})
+    accounts: mongoose.Types.ObjectId[];
 }

@@ -20,9 +20,19 @@ import { OperationController } from './operation/operation.controller';
   imports: [ MongooseModule.forRoot('mongodb://localhost:27017',{dbName: 'cost-tracker'}),
   MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
   MongooseModule.forFeature([{ name: 'Account', schema: AccountSchema }]),
-  MongooseModule.forFeature([{ name: 'Operation', schema: OperationSchema }])
+  MongooseModule.forFeature([{ name: 'Operation', schema: OperationSchema }]),
 ],
-  controllers: [AppController, UserController, AccountController, OperationController],
-  providers: [AppService, UserService, AccountService, OperationService],
+  controllers: [
+    AppController, 
+    UserController, 
+    AccountController, 
+    OperationController
+  ],
+  providers: [
+    AppService, 
+    UserService, 
+    AccountService, 
+    OperationService
+  ]
 })
 export class AppModule {}

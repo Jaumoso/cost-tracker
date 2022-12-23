@@ -20,7 +20,7 @@ export class User {
    @Prop()
    password: string;
 
-   @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Account'})
-   account: Account;
+   @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Account'}]})
+   accounts: Account[];
 }
 export const UserSchema = SchemaFactory.createForClass(User);

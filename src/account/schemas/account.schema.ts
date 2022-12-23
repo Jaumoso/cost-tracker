@@ -4,6 +4,10 @@ import mongoose from "mongoose";
 import { Operation } from "src/operation/schemas/operation.schema";
 @Schema()
 export class Account {
+
+    @Prop()
+    name: string;
+
     @Prop()
     totalMoney: number;
     

@@ -85,6 +85,9 @@ npm i @nestjs/mapped-types --save
 
 npm install --save @nestjs/swagger
 
+npm install --save @nestjs/config
+
+
 ## AUTHENTICATION
 
 npm install --save @nestjs/passport passport passport-local

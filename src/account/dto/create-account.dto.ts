@@ -1,8 +1,11 @@
 /* eslint-disable prettier/prettier */
 import { ApiProperty } from "@nestjs/swagger";
-import { /* IsEmail, IsNotEmpty, */ IsNumber/* , IsString, MaxLength, MinLength */ } from "class-validator";
+import { /* IsEmail, IsNotEmpty, */ IsNumber , IsString, /* MaxLength, MinLength */ } from "class-validator";
 import mongoose from "mongoose";
 export class CreateAccountDto {
+
+    @IsString()
+    name: string;
 
     @ApiProperty({type: Number, description: 'Total account money. This is to calculate variation of money over time, and serves as point of reference.'})
     @IsNumber()

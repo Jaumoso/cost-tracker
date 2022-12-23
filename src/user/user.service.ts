@@ -23,7 +23,7 @@ async updateUser(userId: string, updateUserDto: UpdateUserDto): Promise<IUser> {
    return existingUser;
 }
 async getAllUsers(): Promise<IUser[]> {
-    const userData = await this.userModel.find().populate({path: 'account', populate: { path: 'operations'}}); // TODO: cuidadito con esto
+    const userData = await this.userModel.find().populate({path: 'accounts', populate: { path: 'operations'}}); // TODO: cuidadito con esto
     if (!userData || userData.length == 0) {
         throw new NotFoundException('Users data not found!');
     }
