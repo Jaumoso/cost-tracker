@@ -92,3 +92,6 @@ npm install --save-dev @types/passport-local
 
 npm install --save @nestjs/jwt passport-jwt
 npm install --save-dev @types/passport-jwt
+
+npm install bcrypt
+npm install --save-dev @types/bcrypt
