@@ -88,7 +88,7 @@ npm install --save @nestjs/swagger
 npm install --save @nestjs/config
 
 
-## AUTHENTICATION
+## AUTHENTICATION ( no terminado, no hace falta instalar aún )
 
 npm install --save @nestjs/passport passport passport-local
 npm install --save-dev @types/passport-local

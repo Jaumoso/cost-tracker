@@ -15,6 +15,7 @@ constructor(@InjectModel('Operation') private operationModel:Model<IOperation>) 
       const newOperation = await new this.operationModel(createOperationDto);
       return newOperation.save();
     }
+
     async updateOperation(operationId: string, updateOperationDto: UpdateOperationDto): Promise<IOperation> {
       const existingOperation = await        this.operationModel.findByIdAndUpdate(operationId, updateOperationDto, { new: true });
       if (!existingOperation) {
@@ -22,6 +23,7 @@ constructor(@InjectModel('Operation') private operationModel:Model<IOperation>) 
       }
       return existingOperation;
     }
+
     async getAllOperations(): Promise<IOperation[]> {
       const operationData = await this.operationModel.find();
       if (!operationData || operationData.length == 0) {
@@ -29,6 +31,7 @@ constructor(@InjectModel('Operation') private operationModel:Model<IOperation>) 
       }
       return operationData;
     }
+
     async getOperation(operationId: string): Promise<IOperation> {
       const existingOperation = await     this.operationModel.findById(operationId).exec();
       if (!existingOperation) {
@@ -43,6 +46,7 @@ constructor(@InjectModel('Operation') private operationModel:Model<IOperation>) 
       }
       return deletedOperation;
     }
+
 /*     async filterOperation(): Promise<IOperation> {
       const filterOperation = await this.operationModel.filterOperation()
     } */
