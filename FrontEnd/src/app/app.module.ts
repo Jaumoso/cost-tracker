@@ -11,10 +11,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { AppComponent } from './app.component';
 
 import 'hammerjs';
+import { BillsComponent } from './bills/bills.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BillsComponent
   ],
   imports: [
     BrowserModule,

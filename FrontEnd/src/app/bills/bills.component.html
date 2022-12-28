@@ -1,0 +1,31 @@
+<div  fxLayout = "column"
+      class="container"    >
+
+   
+  <div >
+    <mat-list-item *ngFor="let user of users">
+      <mat-card class="name">
+        <h1>Owner's Name: {{user.name}} {{user.surname1}} {{user.surname2}}</h1>
+      </mat-card>
+      <div id="main">
+        <mat-list-item *ngFor="let account of user.accounts">
+          <mat-card class="account">
+            <h1>Account: {{account.name}} </h1>
+            <h1>Total left: {{account.totalMoney}} </h1>
+          </mat-card>
+          <div id="main">
+            <mat-list-item *ngFor="let operation of account.operations">
+              <mat-card class="operation">
+                <h1>Concept: {{operation.concept}}</h1>
+                <h1>Amount: {{operation.amount}}</h1>
+              </mat-card>
+            </mat-list-item>
+          </div>  
+        </mat-list-item>
+      </div>
+    </mat-list-item>
+  </div>
+
+  
+</div>
+
