@@ -15,6 +15,7 @@ export class BillsComponent implements OnInit {
   users: User[] ; 
   accounts: Account[];
   operations: Operation[];
+  oper: Operation;
 
   constructor(private userService: UserService) { }
 
@@ -24,4 +25,11 @@ export class BillsComponent implements OnInit {
 
   }
 
+  onSelect(operation: Operation):void {
+    this.oper= operation;
+  }
+
+  onSelectLess():void {
+    this.oper= null;
+  }
 }

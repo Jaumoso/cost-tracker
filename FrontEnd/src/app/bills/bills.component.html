@@ -16,8 +16,16 @@
           <div id="main">
             <mat-list-item *ngFor="let operation of account.operations">
               <mat-card class="operation">
-                <h1>Concept: {{operation.concept}}</h1>
-                <h1>Amount: {{operation.amount}}</h1>
+                <h3 style="text-align:left;">{{operation.concept}}  <span style="float:right;">{{operation.amount}}$</span></h3>
+                <mat-card-actions align="end" *ngIf="!oper">
+                  <button mat-button (click)="onSelect(operation)">MORE DETAILS</button>
+                </mat-card-actions>
+                  <mat-card *ngIf="oper">
+                    <app-operation-detail [operation]="oper"></app-operation-detail>
+                    <!-- <h1>Concept: {{operation.concept}}</h1>
+                    <h1>Date: {{operation.date}}</h1> -->
+                    <button mat-flat-button color="accent" (click)="onSelectLess()">LESS DETAILS</button>
+                  </mat-card>
               </mat-card>
             </mat-list-item>
           </div>  

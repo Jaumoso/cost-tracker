@@ -9,14 +9,18 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 
 import { AppComponent } from './app.component';
+import { BillsComponent } from './bills/bills.component';
+import { OperationDetailComponent } from './operation-detail/operation-detail.component';
+
+import { UserService} from './services/user.service';
 
 import 'hammerjs';
-import { BillsComponent } from './bills/bills.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BillsComponent
+    BillsComponent,
+    OperationDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +32,7 @@ import { BillsComponent } from './bills/bills.component';
     MatButtonModule,
     FlexLayoutModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

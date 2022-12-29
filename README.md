@@ -94,6 +94,7 @@ npm init
 npm install lite-server --save-dev
 
 npm start
+npm install font-awesome@4.7.0 --save
 
 
 WATCH CHANGES:
