@@ -16,4 +16,14 @@ export class CreateOperationDto {
     @IsNumber()
     @IsNotEmpty()
     amount: number;
+
+    @ApiProperty({type: String, description: 'Extended description of the operation.'})
+    @IsString()
+    @IsNotEmpty()
+    details: string;
+
+    @ApiProperty({type: String, description: 'Location in which the operation was made.'})
+    @IsString()
+    @IsNotEmpty()
+    location: string;
 }

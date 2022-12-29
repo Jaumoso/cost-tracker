@@ -8,5 +8,9 @@ export class Operation {
     concept: string;
     @Prop()
     amount: number;
+    @Prop()
+    details: string;
+    @Prop()
+    location: string;
 }
 export const OperationSchema = SchemaFactory.createForClass(Operation);
