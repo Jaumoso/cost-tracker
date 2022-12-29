@@ -87,21 +87,6 @@ npm install --save @nestjs/swagger
 
 npm install --save @nestjs/config
 
-## ANGULAR
-
-npm init
-
-npm install lite-server --save-dev
-
-npm start
-
-
-WATCH CHANGES:
-```
-npm install --save-dev onchange@3.3.0
-npm install --save-dev parallelshell@3.0.1
-```
-
 ## AUTHENTICATION ( no terminado, no hace falta instalar aún )
 
 npm install --save @nestjs/passport passport passport-local

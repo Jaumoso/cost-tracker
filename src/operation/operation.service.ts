@@ -47,7 +47,4 @@ constructor(@InjectModel('Operation') private operationModel:Model<IOperation>) 
       return deletedOperation;
     }
 
-/*     async filterOperation(): Promise<IOperation> {
-      const filterOperation = await this.operationModel.filterOperation()
-    } */
 }
