@@ -4,6 +4,6 @@ export interface IOperation extends Document{
     readonly date: Date;
     readonly concept: string;
     readonly amount: number;
-    readonly details: string;
-    readonly location: string;
+    readonly details?: string;
+    readonly location?: string;
 }
