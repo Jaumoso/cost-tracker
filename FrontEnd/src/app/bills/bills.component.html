@@ -17,10 +17,10 @@
             <mat-list-item *ngFor="let operation of account.operations">
               <mat-card class="operation" >
                 <h3 style="text-align:left;">{{operation.concept}}  <span style="float:right;">{{operation.amount}}$</span></h3>
-                <mat-card-actions align="end" *ngIf="!oper">
+                <mat-card-actions align="end" *ngIf="!oper ||oper.id  != operation.id ">
                   <button mat-button color="primary" (click)="onSelect(operation)">MORE DETAILS</button>
                 </mat-card-actions>
-                  <mat-card *ngIf="oper">
+                  <mat-card *ngIf="!!oper && oper.id == operation.id">
                     <app-operation-detail [operation]="operation"></app-operation-detail>
                     <button mat-flat-button  (click)="onSelectLess()">LESS DETAILS</button>
                   </mat-card>

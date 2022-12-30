@@ -1,0 +1,54 @@
+<div fxLayout="column"
+  class="container">
+  <div *ngIf="user">
+    <table *ngFor="let account of user.accounts">
+      <tr class="tr" ><th colspan="3">{{ account.name }} Account</th></tr>
+      <th> Operation ID:</th>
+      <th> Concept:</th>
+      <th> Amount Spent:</th>
+      
+      <tr  *ngFor="let operation of account.operations">
+          <td style="width:70%">{{ operation.id }}</td>
+          <td style="width:70%">{{ operation.concept }}</td>
+          <td style="width:70%">{{ operation.amount }}</td>
+
+      </tr>
+    </table>
+    
+    <table *ngFor="let user of users" style="width:100%;">
+      <tr >
+        <th><h1>User: {{user.name}} {{user.surname1}}</h1></th>
+      </tr>
+      
+    </table>
+
+    <!-- <table mat-table [dataSource]="users">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Date</th>
+        <td mat-cell *matCellDef="let user"> 
+          <td mat-cell *matCellDef="let user.accounts">
+            {{user.accounts.id}}
+          </td>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Description</th>
+        <td mat-cell *matCellDef="let user"> {{user.email}}</td>
+      </ng-container> -->
+
+      <!-- <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Amount Spent</th>
+        <td mat-cell *matCellDef="let user"> {{user.email}}</td>
+      </ng-container> -->
+
+      <!-- <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Total left</th>
+        <td mat-cell *matCellDef="let user"> {{user.email}}</td>
+      </ng-container> -->
+      <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+    </table> -->
+  </div>
+</div>

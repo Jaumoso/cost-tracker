@@ -8,17 +8,19 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { AppRoutingModule} from './app-routing/app-routing.module';
-import { AppComponent } from './app.component';
-import { BillsComponent } from './bills/bills.component';
-import { OperationDetailComponent } from './operation-detail/operation-detail.component';
+import {MatTableModule} from '@angular/material/table';
 
 import { UserService} from './services/user.service';
 
 import 'hammerjs';
+import { AppComponent } from './app.component';
+import { BillsComponent } from './bills/bills.component';
+import { OperationDetailComponent } from './operation-detail/operation-detail.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { BillsV2Component } from './bills-v2/bills-v2.component';
 import { OperationDetailV2Component } from './operation-detail-v2/operation-detail-v2.component';
+import { BillsTableComponent } from './bills-table/bills-table.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { OperationDetailV2Component } from './operation-detail-v2/operation-deta
     HeaderComponent,
     FooterComponent,
     BillsV2Component,
-    OperationDetailV2Component
+    OperationDetailV2Component,
+    BillsTableComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,7 @@ import { OperationDetailV2Component } from './operation-detail-v2/operation-deta
     MatCardModule,
     MatButtonModule,
     FlexLayoutModule,
+    MatTableModule,
     AppRoutingModule
   ],
   providers: [UserService],

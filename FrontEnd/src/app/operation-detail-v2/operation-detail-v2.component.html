@@ -1,6 +1,9 @@
-<div style="text-align: left;">
-  <h3>Concept:  {{operation.concept}}</h3>
-  <h3>Total:    {{operation.amount}}</h3>
-  <h3>Date:     {{operation.date}}</h3>
-</div>
-<button mat-flat-button (click)="goBack()">BACK</button>
+<mat-card class="account">
+
+  <div style="text-align: left;">
+    <h3>Concept:  {{operation.concept}}</h3>
+    <h3>Total:    {{operation.amount}}</h3>
+    <h3>Date:     {{operation.date}}</h3>
+  </div>
+</mat-card>
+<button mat-flat-button style="float:inline-start;" (click)="goBack()">BACK</button>
