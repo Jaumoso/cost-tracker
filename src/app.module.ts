@@ -17,8 +17,8 @@ import { OperationService } from './operation/operation.service';
 import { OperationController } from './operation/operation.controller';
 import { AuthModule } from './auth/auth.module';
 
-@Module({
-  imports: [ MongooseModule.forRoot('mongodb+srv://CostTrackerJaumEzzi:L4BXoFfMPHTPab19@costtracker.hbqfwlv.mongodb.net/test',{dbName: 'cost-tracker'}),
+@Module({ // A CHANGE IN THE NEXT LINE IS NEEDED. USER AND PASSWORD REQUIRED TO CONNECT TO THE DATABASE.
+  imports: [ MongooseModule.forRoot('mongodb+srv://<user>:<password>@costtracker.hbqfwlv.mongodb.net/test',{dbName: 'cost-tracker'}),
   /* MongooseModule.forRoot('mongodb://localhost:27017',{dbName: 'cost-tracker'}), */
   MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
   MongooseModule.forFeature([{ name: 'Account', schema: AccountSchema }]),
