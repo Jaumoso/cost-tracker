@@ -14,16 +14,18 @@
             <h1>Total left: {{account.totalMoney}} </h1>
           </mat-card>
           <div id="main">
-            <mat-list-item *ngFor="let operation of account.operations">
+            <mat-list-item *ngFor="let operation of account.operations" [routerLink]="['/operationDetail',user.id,account.id,operation.id]" >
               <mat-card class="operation" >
                 <h3 style="text-align:left;">{{operation.concept}}  <span style="float:right;">{{operation.amount}}$</span></h3>
-                <mat-card-actions align="end" *ngIf="!oper">
-                  <button mat-button color="primary" (click)="onSelect(operation)">MORE DETAILS</button>
+                <mat-card-actions align="end" *ngIf="!operation">
+                  <button mat-button color="primary" (click)="onSelect(user.id,account.id,operation.id)">MORE DETAILS</button>
                 </mat-card-actions>
-                  <mat-card *ngIf="oper">
+                  <!-- <mat-card *ngIf="operation">
                     <app-operation-detail [operation]="operation"></app-operation-detail>
+                    <h1>Concept: {{operation.concept}}</h1>
+                    <h1>Date: {{operation.date}}</h1>
                     <button mat-flat-button  (click)="onSelectLess()">LESS DETAILS</button>
-                  </mat-card>
+                  </mat-card> -->
               </mat-card>
             </mat-list-item>
           </div>  
@@ -34,4 +36,3 @@
 
   
 </div>
-

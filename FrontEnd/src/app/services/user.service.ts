@@ -13,4 +13,8 @@ export class UserService {
   getUsers(): User[]{
     return USERS;
   }
+
+  getUser(id:string): User{
+    return USERS.filter(user => (user.id = id))[0];
+  }
 }

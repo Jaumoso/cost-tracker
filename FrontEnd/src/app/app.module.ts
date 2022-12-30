@@ -7,7 +7,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-
+import { AppRoutingModule} from './app-routing/app-routing.module';
 import { AppComponent } from './app.component';
 import { BillsComponent } from './bills/bills.component';
 import { OperationDetailComponent } from './operation-detail/operation-detail.component';
@@ -17,6 +17,8 @@ import { UserService} from './services/user.service';
 import 'hammerjs';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { BillsV2Component } from './bills-v2/bills-v2.component';
+import { OperationDetailV2Component } from './operation-detail-v2/operation-detail-v2.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { FooterComponent } from './footer/footer.component';
     BillsComponent,
     OperationDetailComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    BillsV2Component,
+    OperationDetailV2Component
   ],
   imports: [
     BrowserModule,
@@ -34,7 +38,8 @@ import { FooterComponent } from './footer/footer.component';
     MatGridListModule,
     MatCardModule,
     MatButtonModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    AppRoutingModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
