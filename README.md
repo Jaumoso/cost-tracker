@@ -97,3 +97,9 @@ npm install --save-dev @types/passport-jwt
 
 npm install bcrypt
 npm install --save-dev @types/bcrypt
+
+### GOOGLE AUTH (prueba)
+
+npm install --save @nestjs/passport passport passport-google-oauth20 dotenv
+
+npm install -D @types/passport-google-oauth20
