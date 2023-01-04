@@ -19,6 +19,8 @@ export class GoogleController {
     @UseGuards(AuthGuard('google'))
     @ApiCreatedResponse({description: 'Google Redirect'})
     googleAuthRedirect(@Req() req) {
-      return this.googleService.googleLogin(req)
+      console.log(req.user)
+      /* console.log(req) */
+      return this.googleService.googleLogin(req);
     }
 }

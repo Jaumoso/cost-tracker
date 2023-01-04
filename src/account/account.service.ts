@@ -5,10 +5,14 @@ import { CreateAccountDto } from 'src/account/dto/create-account.dto';
 import { IAccount } from 'src/account/interfaces/account.interface';
 import { Model } from "mongoose";
 import { UpdateAccountDto } from 'src/account/dto/update-account.dto';
+
+import { OperationService } from 'src/operation/operation.service';
+
 @Injectable()
 export class AccountService {
   
-  constructor(@InjectModel('Account') private accountModel:Model<IAccount>) { }
+  constructor(@InjectModel('Account') private accountModel:Model<IAccount>,
+    private operationService: OperationService) { }
 
   async createAccount(createAccountDto: CreateAccountDto): Promise<IAccount> {
     const newAccount = await new this.accountModel(createAccountDto);
@@ -45,5 +49,44 @@ export class AccountService {
       throw new NotFoundException(`Account #${accountId} not found`);
     }
     return deletedAccount;
+  }
+
+  async getTotalMoneyPerOperation(accountId: string) {
+    const existingAccount = await this.accountModel.findById(accountId);
+    if (!existingAccount) {
+      throw new NotFoundException(`Account #${accountId} not found`);
+    }
+
+    const initialMoney = existingAccount.totalMoney;
+    const operationIds: any = existingAccount.operations;
+    /* console.log(operationIds); */
+    const operationDocuments: any[] = await Promise.all(operationIds.map(async (id) => this.operationService.getOperation(id.toString())));
+    /* console.log(operationDocuments[0].amount) */
+    const operationMoney = [];
+
+    operationMoney[0] = initialMoney + operationDocuments[0].amount;
+
+    for(let i = 1; i < operationDocuments.length; i++){
+      operationMoney[i] = operationMoney[i-1] + operationDocuments[i].amount;
+    } 
+    return operationMoney;
+  }
+
+  async getMaxAndMinMoneyForAccount(accountId: string) {
+    const existingAccount = await this.accountModel.findById(accountId);
+    if (!existingAccount) {
+      throw new NotFoundException(`Account #${accountId} not found`);
+    }
+
+    const operationMoney = await this.getTotalMoneyPerOperation(accountId);
+    /* console.log(operationMoney); */
+
+
+    const max =  Math.max(... operationMoney);
+    const min = Math.min(... operationMoney);
+  
+      /* Math.max.apply(null, operationMoney); */
+
+    return [max, min];
   }
 }

@@ -74,6 +74,7 @@ Nest is [MIT licensed](LICENSE).
 
 # EXTRA
 
+```
 npm i @nestjs/cli
 
 npm install --save @nestjs/mongoose mongoose
@@ -86,9 +87,10 @@ npm i @nestjs/mapped-types --save
 npm install --save @nestjs/swagger
 
 npm install --save @nestjs/config
+```
 
 ## AUTHENTICATION ( no terminado, no hace falta instalar aún )
-
+```
 npm install --save @nestjs/passport passport passport-local
 npm install --save-dev @types/passport-local
 
@@ -97,9 +99,16 @@ npm install --save-dev @types/passport-jwt
 
 npm install bcrypt
 npm install --save-dev @types/bcrypt
-
+```
 ### GOOGLE AUTH (prueba)
 
+```
 npm install --save @nestjs/passport passport passport-google-oauth20 dotenv
 
 npm install -D @types/passport-google-oauth20
+```
+
+## TESTING
+```
+npm i --save-dev @nestjs/testing
+```

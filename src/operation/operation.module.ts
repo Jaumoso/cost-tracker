@@ -6,8 +6,11 @@ import { OperationService } from './operation.service';
 import { OperationSchema } from './schemas/operation.schema';
 
 @Module({
-    imports: [MongooseModule.forFeature([{ name: 'Operation', schema: OperationSchema }]),],
+    imports: [
+        MongooseModule.forFeature([{ name: 'Operation', schema: OperationSchema }]),
+    ],
     controllers: [OperationController],
-    providers: [OperationService]
+    providers: [OperationService],
+    exports: [OperationService],
 })
 export class OperationModule {}

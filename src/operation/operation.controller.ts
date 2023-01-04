@@ -55,6 +55,21 @@ export class OperationController {
     }
   }
 
+  @Get('/date/:date1/:date2')
+  @ApiCreatedResponse({description: 'This function will get the Operations in a defined timeframe.'})
+    async getOperationsByDate(@Res() response, @Param('date1') dateIntervalIni: string, @Param('date2') dateIntervalEnd: string,) {
+    try {
+      dateIntervalIni
+      const operationData = await this.operationService.getOperationsByDate(dateIntervalIni, dateIntervalEnd);
+      return response.status(HttpStatus.OK).json({
+        message: 'All operations data found successfully for date interval ' 
+        + dateIntervalIni + " - " + dateIntervalEnd, operationData,});
+    } 
+    catch (err) {
+      return response.status(err.status).json(err.response);
+    }
+  }
+
   @Get('/:id')
   @ApiCreatedResponse({description: 'This function will get the operation passed as parameter from the database.'})
   async getOperation(@Res() response, @Param('id') operationId: string) {
