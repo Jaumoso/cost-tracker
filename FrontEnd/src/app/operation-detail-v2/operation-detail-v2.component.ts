@@ -35,4 +35,8 @@ export class OperationDetailV2Component implements OnInit {
   goBack(): void {
     this.location.back();
   }
+  recoverOperation(userID:string, accountID: string, operation:Operation):void {
+    this.userService.recoverOperation(userID,accountID, operation);
+    this.location.back();
+  }
 }

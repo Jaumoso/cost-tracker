@@ -15,6 +15,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { UserService} from './services/user.service';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import 'hammerjs';
 import { AppComponent } from './app.component';
@@ -26,6 +29,7 @@ import { BillsV2Component } from './bills-v2/bills-v2.component';
 import { OperationDetailV2Component } from './operation-detail-v2/operation-detail-v2.component';
 import { BillsTableComponent } from './bills-table/bills-table.component';
 import { AddBillComponent } from './add-bill/add-bill.component';
+import { AddBillFormComponent } from './add-bill-form/add-bill-form.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +41,9 @@ import { AddBillComponent } from './add-bill/add-bill.component';
     BillsV2Component,
     OperationDetailV2Component,
     BillsTableComponent,
-    AddBillComponent
+    AddBillComponent,
+    AddBillFormComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -54,8 +60,12 @@ import { AddBillComponent } from './add-bill/add-bill.component';
     MatInputModule,
     MatCheckboxModule,
     MatDialogModule,
-    FormsModule 
+    FormsModule,
+    MatSelectModule,
+    MatSlideToggleModule,
+    ReactiveFormsModule
   ],
+  entryComponents:[ AddBillFormComponent ],
   providers: [UserService],
   bootstrap: [AppComponent]
 })

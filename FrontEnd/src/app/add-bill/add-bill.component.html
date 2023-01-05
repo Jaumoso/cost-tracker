@@ -1,16 +1,16 @@
-<div style="width: 100%;" fxLayout="column">
+<div style="width: 100%;" >
   <mat-toolbar color="secondary">
     Add Bill
   <span class="flex-spacer"></span>
   </mat-toolbar>
   <mat-card class="flex-spacer" fxLayout="row" fxLayoutGap="100px">
     <!-- <p>hola: {{ operation | json }} </p> -->
-    <form novalidate #loginForm="ngForm" (ngSubmit)="onSubmit()">
+    <form novalidate #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
       <mat-dialog-content>
         <p>
           <mat-form-field>
             <label>Concept: </label>
-            <input matInput placeholder="Concept" type="text" [(ngModel)]="operation.concept" name="concept"
+            <input matInput placeholder="Concept" type="text" [(ngModel)]="operation2.concept" name="concept"
               #concept="ngModel" required>
             <mat-error *ngIf="concept.errors?.required">Concept is required</mat-error>
           </mat-form-field>
@@ -18,13 +18,13 @@
         <p>
           <mat-form-field>
             <label>Date: </label>
-            <input matInput placeholder="Date" type="date" [(ngModel)]="operation.date" name="date" #date="ngModel">
+            <input matInput placeholder="Date" type="date" [(ngModel)]="operation2.date" name="date" #date="ngModel">
             <mat-error *ngIf="date.errors?.required">Concept is required</mat-error>
           </mat-form-field>
         </p>
         <mat-form-field>
           <label>Amount: </label>
-          <input matInput placeholder="Amount" type="number" [(ngModel)]="operation.amount" name="amount"
+          <input matInput placeholder="Amount" type="number" [(ngModel)]="operation2.amount" name="amount"
             #amount="ngModel" required>
           <mat-error *ngIf="amount.errors?.required">Please specify the right amount</mat-error>
         </mat-form-field>

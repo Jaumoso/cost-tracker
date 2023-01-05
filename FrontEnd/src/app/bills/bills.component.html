@@ -12,11 +12,12 @@
             <h1>Account: {{account.name}} </h1>
             <h1>Total left: {{account.totalMoney}} </h1>
             <mat-card-actions>
-              <button mat-button *ngIf="!acc || acc.id != account.id" class="add" (click)="selectAccount(account)">ADD A BILL</button>
+              <button mat-button *ngIf="!acc || acc.id != account.id" class="add" (click)="selectAccount(account)">ADD A
+                BILL</button>
               <div *ngIf="acc && acc.id === account.id">
                 <app-add-bill [userID]="user.id" [accountID]="account.id"></app-add-bill>
                 <mat-card-actions>
-                  <button mat-button  class="cancel" (click)="unselectAccount()">Cancel</button>
+                  <button mat-button class="cancel" (click)="unselectAccount()">Cancel</button>
                 </mat-card-actions>
               </div>
             </mat-card-actions>

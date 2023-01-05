@@ -4,6 +4,7 @@ import { User } from '../shared/User';
 import { Account} from '../shared/Account';
 import {MatDialog, MatDialogRef} from '@angular/material';
 import { Operation} from '../shared/Operation';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-add-bill',
@@ -24,7 +25,7 @@ export class AddBillComponent implements OnInit {
   operations: Operation[];
   date= new Date();
   operID= '';
-  operation: Operation = {id:this.operID.toString(), concept:'', amount: 0, date: this.date.toLocaleDateString()};
+  operation2: Operation = {id:this.operID.toString(), concept:'', amount: 0, date: this.date.toLocaleDateString()};
 
   constructor(private userService: UserService) { }
   
@@ -39,12 +40,11 @@ export class AddBillComponent implements OnInit {
 
   }
 
-  onSubmit(){
-      this.operID=this.userService.getMaxIdOper(this.userID,this.accountID); 
-      this.operation.id = this.operID;
-      // this.operation.id=(((+this.operID)+1).toString());
-      this.userService.addOperation(this.userID, this.accountID, this.operation);
-      // console.log(this.operation);
+  onSubmit(form: NgForm){
+      // this.operID=this.userService.getMaxIdOper(this.userID,this.accountID); 
+      this.operation2.id = this.userService.getMaxIdOper(this.userID,this.accountID); 
+      this.userService.addOperation(this.userID, this.accountID, this.operation2);
+      // form.resetForm();
     }
 
 

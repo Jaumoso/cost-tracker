@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { UserService } from '../services/user.service';
 import { User } from '../shared/User';
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { AddBillFormComponent } from '../add-bill-form/add-bill-form.component';
 
 @Component({
   selector: 'app-bills-v2',
@@ -12,11 +14,22 @@ export class BillsV2Component implements OnInit {
 
   users: User[] ;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,public dialog: MatDialog) { }
 
   ngOnInit() {
     this.users = this.userService.getUsers();
 
+  }
+  openAddBillForm(accountID: string, userID: string):void{
+    this.dialog.open(AddBillFormComponent,{
+      data: {
+        accID: accountID,
+        usID: userID
+      },
+     width:"800px",
+     height: "600px"
+    });
+    
   }
 
 }
