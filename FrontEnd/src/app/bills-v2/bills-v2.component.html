@@ -20,12 +20,6 @@
                 <mat-card-actions align="end" *ngIf="!operation">
                   <button mat-button color="primary" (click)="onSelect(user.id,account.id,operation.id)">MORE DETAILS</button>
                 </mat-card-actions>
-                  <!-- <mat-card *ngIf="operation">
-                    <app-operation-detail [operation]="operation"></app-operation-detail>
-                    <h1>Concept: {{operation.concept}}</h1>
-                    <h1>Date: {{operation.date}}</h1>
-                    <button mat-flat-button  (click)="onSelectLess()">LESS DETAILS</button>
-                  </mat-card> -->
               </mat-card>
             </mat-list-item>
           </div>  

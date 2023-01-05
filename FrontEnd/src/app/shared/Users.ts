@@ -10,7 +10,7 @@ export const USERS: User[] = [{
    accounts: [{
         id: '1',
         name: 'Main',
-        totalMoney: 10000,
+        totalMoney: 500,
         operations: [{
             id: '1',
             date: '2010-12-02T17:57:28.556094Z',
@@ -34,7 +34,7 @@ export const USERS: User[] = [{
         {
             id:'2',
             name: 'Second',
-            totalMoney: 2000,
+            totalMoney: 0,
             operations: [{
                 id:'4',
                 date: '2010-12-02T17:57:28.556094Z',
@@ -51,7 +51,7 @@ export const USERS: User[] = [{
                 id:'6',
                 date: '2012-12-02T17:57:28.556094Z',
                 concept: "Stocks Sold",
-                amount: 300       
+                amount: 1000       
             }
             ]
         }

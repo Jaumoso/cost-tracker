@@ -9,7 +9,11 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { AppRoutingModule} from './app-routing/app-routing.module';
 import {MatTableModule} from '@angular/material/table';
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
 import { UserService} from './services/user.service';
 
 import 'hammerjs';
@@ -21,6 +25,7 @@ import { FooterComponent } from './footer/footer.component';
 import { BillsV2Component } from './bills-v2/bills-v2.component';
 import { OperationDetailV2Component } from './operation-detail-v2/operation-detail-v2.component';
 import { BillsTableComponent } from './bills-table/bills-table.component';
+import { AddBillComponent } from './add-bill/add-bill.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +36,8 @@ import { BillsTableComponent } from './bills-table/bills-table.component';
     FooterComponent,
     BillsV2Component,
     OperationDetailV2Component,
-    BillsTableComponent
+    BillsTableComponent,
+    AddBillComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +49,12 @@ import { BillsTableComponent } from './bills-table/bills-table.component';
     MatButtonModule,
     FlexLayoutModule,
     MatTableModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatFormFieldModule, 
+    MatInputModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    FormsModule 
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
