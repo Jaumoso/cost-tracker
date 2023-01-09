@@ -2,7 +2,7 @@
       class="container"    >
 
    
-  <div >
+  <div *ngIf="users">
     <mat-list-item *ngFor="let user of users">
       <mat-card class="name">
         <h1>Owner's Name: {{user.name}} {{user.surname1}} {{user.surname2}}</h1>
@@ -30,5 +30,7 @@
     </mat-list-item>
   </div>
 
-  
+  <div [hidden]="users">
+    <mat-spinner></mat-spinner><h4>Loading...</h4>
+  </div>
 </div>

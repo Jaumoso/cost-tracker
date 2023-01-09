@@ -17,7 +17,8 @@ export class BillsV2Component implements OnInit {
   constructor(private userService: UserService,public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.users = this.userService.getUsers();
+    this.userService.getUsers().then(usuarios => this.users = usuarios);
+    // this.users = this.userService.getUsers();
 
   }
   openAddBillForm(accountID: string, userID: string):void{

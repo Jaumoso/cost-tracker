@@ -27,7 +27,8 @@ export class OperationDetailV2Component implements OnInit {
     const accountID = +this.route.snapshot.params['accountID'];
     const operationID = +this.route.snapshot.params['operationID'];
 
-    this.user = this.userService.getUser(userID.toString());
+    // this.user = this.userService.getUser(userID.toString());
+    this.userService.getUser(userID.toString()).then(usario => this.user = usario);
     this.account=this.user.accounts.filter(account => account.id == accountID.toString())[0];
     this.operation= this.account.operations.filter(operation=> operation.id == operationID.toString())[0];
   }

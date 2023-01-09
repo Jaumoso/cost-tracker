@@ -28,12 +28,14 @@ export class AddBillComponent implements OnInit {
   constructor(private userService: UserService) { }
   
   ngOnInit() {
-    this.users = this.userService.getUsers();
+    this.userService.getUsers().then(usuarios => this.users = usuarios);
+    // this.users = this.userService.getUsers();
 
   }
 
   onSubmit(){
-      this.operation2.id = this.userService.getMaxIdOper(this.userID,this.accountID); 
+      this.userService.getMaxIdOper(this.userID,this.accountID).then(operID => this.operation2.id = operID);  //without use of promises
+      // this.operation2.id = this.userService.getMaxIdOper(this.userID,this.accountID);  //without use of promises
       this.userService.addOperation(this.userID, this.accountID, this.operation2);
       this.operation2 = {id:'', concept:'', amount: 0, date: this.date.toLocaleDateString()};
       // form.resetForm();

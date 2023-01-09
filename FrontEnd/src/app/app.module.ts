@@ -18,6 +18,7 @@ import { UserService} from './services/user.service';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import 'hammerjs';
 import { AppComponent } from './app.component';
@@ -63,6 +64,7 @@ import { AddBillFormComponent } from './add-bill-form/add-bill-form.component';
     FormsModule,
     MatSelectModule,
     MatSlideToggleModule,
+    MatProgressSpinnerModule,
     ReactiveFormsModule
   ],
   entryComponents:[ AddBillFormComponent ],
