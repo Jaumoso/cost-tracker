@@ -27,13 +27,13 @@
               <mat-card class="operation">
                 <h3 style="text-align:left;">{{operation.concept}} <span
                     style="float:right;">{{operation.amount}}$</span></h3>
-                <mat-card-actions align="end" *ngIf="!oper ||oper.id  != operation.id ">
-                  <button mat-button color="primary" (click)="onSelect(operation)">MORE DETAILS</button>
+                <mat-card-actions align="end" *ngIf="!oper ||oper.id  != operation.id || accOP.id !=account.id ">
+                  <button mat-button color="primary" (click)="onSelect(operation);selectAccountOperation(account)">MORE DETAILS</button>
                 </mat-card-actions>
-                <mat-card *ngIf="!!oper && oper.id == operation.id">
+                <mat-card *ngIf="!!oper && oper.id == operation.id && accOP.id ==account.id">
                   <app-operation-detail [operation]="operation"></app-operation-detail>
                   <button mat-flat-button (click)="recoverOperation(user.id,account.id,operation)">Recover Bill</button>
-                  <button mat-flat-button (click)="onSelectLess()">LESS DETAILS</button>
+                  <button mat-flat-button (click)="onSelectLess();unselectAccountOperation();">LESS DETAILS</button>
                 </mat-card>
               </mat-card>
             </mat-list-item>

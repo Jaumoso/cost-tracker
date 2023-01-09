@@ -15,6 +15,7 @@ export class BillsComponent implements OnInit {
   users: User[] ; 
   accounts: Account[];
   acc: Account;
+  accOP: Account;
   operations: Operation[];
   oper: Operation;
 
@@ -40,6 +41,13 @@ export class BillsComponent implements OnInit {
 
   unselectAccount():void{
     this.acc=null;
+  }
+  selectAccountOperation(account:Account):void{
+    this.accOP = account;
+  }
+
+  unselectAccountOperation():void{
+    this.accOP=null;
   }
 
   recoverOperation(userID:string, accountID: string, operation:Operation):void {

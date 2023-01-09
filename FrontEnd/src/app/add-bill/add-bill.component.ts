@@ -21,8 +21,6 @@ export class AddBillComponent implements OnInit {
   accountID: string;
 
   users: User[] ; 
-  accounts: Account[];
-  operations: Operation[];
   date= new Date();
   operID= '';
   operation2: Operation = {id:this.operID.toString(), concept:'', amount: 0, date: this.date.toLocaleDateString()};
@@ -31,19 +29,13 @@ export class AddBillComponent implements OnInit {
   
   ngOnInit() {
     this.users = this.userService.getUsers();
-    //i convert them to num for the addition and then i convert them back to string for the assignation
-    // console.log(this.userService.getMaxIdOper(this.userID,this.accountID));
-    // console.log(this.operation);
-    // console.log(this.userID);
-    // console.log(this.accountID);
-    // console.log("operID: ",this.operID);
 
   }
 
-  onSubmit(form: NgForm){
-      // this.operID=this.userService.getMaxIdOper(this.userID,this.accountID); 
+  onSubmit(){
       this.operation2.id = this.userService.getMaxIdOper(this.userID,this.accountID); 
       this.userService.addOperation(this.userID, this.accountID, this.operation2);
+      this.operation2 = {id:'', concept:'', amount: 0, date: this.date.toLocaleDateString()};
       // form.resetForm();
     }
 
