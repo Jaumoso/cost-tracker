@@ -1,9 +1,10 @@
+/* eslint-disable prettier/prettier */
 import { Test, TestingModule } from '@nestjs/testing';
 import { AccountController } from './account.controller';
 
 describe('AccountController', () => {
   let controller: AccountController;
-
+  
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [AccountController],

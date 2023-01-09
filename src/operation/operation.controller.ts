@@ -55,7 +55,7 @@ export class OperationController {
     }
   }
 
-  @Get('/date/:date1/:date2')
+  @Get('/date/:id/:date1/:date2')
   @ApiCreatedResponse({description: 'This function will get the Operations in a defined timeframe.'})
     async getOperationsByDate(@Res() response, @Param('date1') dateIntervalIni: string, @Param('date2') dateIntervalEnd: string,) {
     try {
