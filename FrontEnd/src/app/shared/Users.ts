@@ -36,19 +36,19 @@ export const USERS: User[] = [{
             name: 'Second',
             totalMoney: 0,
             operations: [{
-                id:'4',
+                id:'1',
                 date: '2010-12-02T17:57:28.556094Z',
                 concept: "Telephone bills",
                 amount: -200
             },
             {
-                id:'5',
+                id:'2',
                 date: '2011-12-02T17:57:28.556094Z',
                 concept: "Rent",
                 amount: -800           
             },
             {
-                id:'6',
+                id:'3',
                 date: '2012-12-02T17:57:28.556094Z',
                 concept: "Stocks Sold",
                 amount: 1000       

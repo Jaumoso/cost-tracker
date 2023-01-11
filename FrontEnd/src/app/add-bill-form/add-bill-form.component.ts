@@ -40,7 +40,8 @@ export class AddBillFormComponent implements OnInit {
 
   onSubmit(){
     this.bill=this.addbillform.value;
-    this.userService.getMaxIdOper(this.data.usID,this.data.accID).then(billID => this.bill.id =billID); 
+    this.userService.getMaxIdOper(this.data.usID,this.data.accID).subscribe(billID => this.bill.id =billID); 
+    // this.userService.getMaxIdOper(this.data.usID,this.data.accID).then(billID => this.bill.id =billID); 
     // this.bill.id = this.userService.getMaxIdOper(this.data.usID,this.data.accID); 
     this.userService.addOperation(this.data.usID, this.data.accID, this.bill);
     console.log("bill is: " +this.bill);

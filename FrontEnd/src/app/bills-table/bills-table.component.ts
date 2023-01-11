@@ -26,8 +26,10 @@ export class BillsTableComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.getUsers().then(usuarios => this.users = usuarios);
-    this.userService.getUser('1').then(usario => this.user = usario);
+    this.userService.getUsers().subscribe(usuarios => this.users = usuarios);
+    this.userService.getUser('1').subscribe(usario => this.user = usario);
+    // this.userService.getUsers().then(usuarios => this.users = usuarios);
+    // this.userService.getUser('1').then(usario => this.user = usario);
     // this.users = this.userService.getUsers();
     // this.user = this.userService.getUser('1');
   }

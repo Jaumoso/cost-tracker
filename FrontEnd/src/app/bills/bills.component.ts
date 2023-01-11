@@ -22,7 +22,8 @@ export class BillsComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.userService.getUsers().then(usuarios => this.users=usuarios);
+    this.userService.getUsers().subscribe(usuarios => this.users=usuarios);
+    // this.userService.getUsers().then(usuarios => this.users=usuarios);
     // this.users = this.userService.getUsers();
 
   }
