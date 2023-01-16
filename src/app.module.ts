@@ -4,35 +4,25 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
-import { UserSchema } from './user/schemas/user.schema';
-import { UserService } from './user/user.service';
-import { UserController } from './user/user.controller';
-
-import { AccountSchema } from './account/schemas/account.schema';
-import { AccountService } from './account/account.service';
-import { AccountController } from './account/account.controller';
-
-import { OperationSchema } from './operation/schemas/operation.schema';
-import { OperationService } from './operation/operation.service';
-import { OperationController } from './operation/operation.controller';
+import { GoogleModule } from './google/google.module';
+import { UserModule } from './user/user.module';
+import { AccountModule } from './account/account.module';
+import { OperationModule } from './operation/operation.module';
 
 @Module({
-  imports: [ MongooseModule.forRoot('mongodb://localhost:27017',{dbName: 'cost-tracker'}),
-  MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
-  MongooseModule.forFeature([{ name: 'Account', schema: AccountSchema }]),
-  MongooseModule.forFeature([{ name: 'Operation', schema: OperationSchema }]),
+  imports: [
+  /* MongooseModule.forRoot('mongodb+srv://CostTrackerJaumEzzi:3MXUq6aeANqu5YkU@costtracker.hbqfwlv.mongodb.net/test',{dbName: 'cost-tracker'}), */
+  MongooseModule.forRoot('mongodb://localhost:27017',{dbName: 'cost-tracker'}),
+  GoogleModule,
+  UserModule,
+  AccountModule,
+  OperationModule,
 ],
   controllers: [
     AppController, 
-    UserController, 
-    AccountController, 
-    OperationController
   ],
   providers: [
     AppService, 
-    UserService, 
-    AccountService, 
-    OperationService
   ]
 })
 export class AppModule {}

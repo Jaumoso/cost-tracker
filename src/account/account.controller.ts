@@ -93,4 +93,51 @@ export class AccountController {
       return response.status(err.status).json(err.response);
     }
   }
+
+  @Get('money/:id')
+  @ApiCreatedResponse({description: 'This function will get the total money per operation for one account.'})
+  async getTotalMoneyPerOperation(@Res() response, @Param('id') accountId: string) {
+    try {
+      const operationMoney = await this.accountService.getTotalMoneyPerOperation(accountId);
+      return response.status(HttpStatus.OK).json({
+        message: 'Account found successfully',
+        operationMoney: operationMoney,
+      });
+    } 
+    catch (err) {
+      return response.status(err.status).json(err.response);
+    }
+  }
+
+  @Get('maxmin/:id')
+  @ApiCreatedResponse({description: 'This function will get the total money per operation for one account.'})
+  async getMaxAndMinMoneyForAccount(@Res() response, @Param('id') accountId: string) {
+    try {
+      const maxminMoney = await this.accountService.getMaxAndMinMoneyForAccount(accountId);
+      return response.status(HttpStatus.OK).json({
+        message: 'Account found successfully',
+        maxMoney: maxminMoney[0],
+        minMoney: maxminMoney[1]
+      });
+    } 
+    catch (err) {
+      return response.status(err.status).json(err.response);
+    }
+  }
+
+/*   @Get('/date/:id/:date1/:date2')
+  @ApiCreatedResponse({description: 'This function will get the Operations in a defined timeframe.'})
+    async getOperationsByDate(@Res() response, @Param('id') accountId: string, @Param('date1') dateIntervalIni: string, @Param('date2') dateIntervalEnd: string,) {
+    try {
+      dateIntervalIni
+      const operationData = await this.accountService.getOperationsByDate(accountId, dateIntervalIni, dateIntervalEnd);
+      return response.status(HttpStatus.OK).json({
+        message: 'All operations data found successfully for date interval ' 
+        + dateIntervalIni + " - " + dateIntervalEnd, operationData,});
+    } 
+    catch (err) {
+      return response.status(err.status).json(err.response);
+    }
+  } */
+
 }
