@@ -89,4 +89,29 @@ export class AccountService {
 
     return [max, min];
   }
+
+/*   async getOperationsByDate(accountId: string, dateString1: string, dateString2: string) {
+    const date1 = new Date(dateString1);
+    const date2 = new Date(dateString2);
+    date1.setHours(0, 0, 0, 0);
+    date2.setHours(23, 59, 59, 999);
+    date1.toISOString();
+    date2.toISOString();
+    console.log("Date1: " + date1);
+    console.log("Date2: " + date2);
+
+    const operationDatalog = await this.accountModel.find({_id: accountId}).populate('operations');
+    console.log(operationDatalog);
+
+
+    const operationData = await this.accountModel.find({_id: accountId,
+}).populate('operations').find({date: {
+  $gte: date1,
+  $lte: date2
+}});
+    if (!operationData || operationData.length == 0) {
+        throw new NotFoundException('Operations data not found!');
+    }
+    return operationData;
+  } */
 }
