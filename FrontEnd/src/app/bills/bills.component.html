@@ -1,0 +1,51 @@
+<div fxLayout="column" class="container">
+
+
+  <div fxFlex *ngIf="users">
+    <mat-list-item *ngFor="let user of users">
+      <mat-card class="name">
+        <h1>Owner's Name: {{user.name}} {{user.surname1}} {{user.surname2}}</h1>
+      </mat-card>
+      <div id="main">
+        <mat-list-item *ngFor="let account of user.accounts">
+          <mat-card class="account">
+            <h1>Account: {{account.name}} </h1>
+            <h1>Total left: {{account.totalMoney}} </h1>
+            <mat-card-actions>
+              <button mat-button *ngIf="!acc || acc.id != account.id" class="add" (click)="selectAccount(account)">ADD A
+                BILL</button>
+              <div *ngIf="acc && acc.id === account.id">
+                <app-add-bill [userID]="user.id" [accountID]="account.id"></app-add-bill>
+                <mat-card-actions>
+                  <button mat-button class="cancel" (click)="unselectAccount()">Cancel</button>
+                </mat-card-actions>
+              </div>
+            </mat-card-actions>
+          </mat-card>
+          <div id="main">
+            <mat-list-item *ngFor="let operation of account.operations">
+              <mat-card class="operation">
+                <h3 style="text-align:left;">{{operation.concept}} <span
+                    style="float:right;">{{operation.amount}}$</span></h3>
+                <mat-card-actions align="end" *ngIf="!oper ||oper.id  != operation.id || accOP.id !=account.id ">
+                  <button mat-button color="primary" (click)="onSelect(operation);selectAccountOperation(account)">MORE DETAILS</button>
+                </mat-card-actions>
+                <mat-card *ngIf="!!oper && oper.id == operation.id && accOP.id ==account.id">
+                  <app-operation-detail [operation]="operation"></app-operation-detail>
+                  <button mat-flat-button (click)="recoverOperation(user.id,account.id,operation)">Recover Bill</button>
+                  <button mat-flat-button (click)="onSelectLess();unselectAccountOperation();">LESS DETAILS</button>
+                </mat-card>
+              </mat-card>
+            </mat-list-item>
+          </div>
+        </mat-list-item>
+      </div>
+    </mat-list-item>
+  </div>
+
+  <div [hidden]="users">
+    <mat-spinner></mat-spinner><h4>Loading...</h4>
+  </div>
+
+
+</div>

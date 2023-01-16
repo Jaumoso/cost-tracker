@@ -1,0 +1,41 @@
+<div style="width: 100%;" >
+  <mat-toolbar color="secondary">
+    Add Bill
+  <span class="flex-spacer"></span>
+  </mat-toolbar>
+  <mat-card class="flex-spacer" fxLayout="row" fxLayoutGap="100px">
+    <p >hola: {{ operation2 | json }} </p>
+    <form novalidate #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+      <mat-dialog-content>
+        <p>
+          <mat-form-field>
+            <label>Concept: </label>
+            <input matInput placeholder="Concept" type="text" [(ngModel)]="operation2.concept" name="concept"
+              #concept="ngModel" required>
+            <mat-error *ngIf="concept.errors?.required">Concept is required</mat-error>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field>
+            <label>Date: </label>
+            <input matInput placeholder="Date" type="date" [(ngModel)]="operation2.date" name="date" #date="ngModel">
+            <mat-error *ngIf="date.errors?.required">Concept is required</mat-error>
+          </mat-form-field>
+        </p>
+        <mat-form-field>
+          <label>Amount: </label>
+          <input matInput placeholder="Amount" type="number" [(ngModel)]="operation2.amount" name="amount"
+            #amount="ngModel" required>
+          <mat-error *ngIf="amount.errors?.required">Please specify the right amount</mat-error>
+        </mat-form-field>
+      </mat-dialog-content>
+      <mat-dialog-actions>
+        <p>
+          <button mat-button style="float:right; width: 100%;" type="submit" mat-button
+            class="background-primary text-floral-white" [disabled]="loginForm.form.invalid">ADD BILL</button>
+        </p>
+      </mat-dialog-actions>
+    </form>
+
+  </mat-card>
+</div>

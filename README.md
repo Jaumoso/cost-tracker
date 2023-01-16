@@ -87,6 +87,21 @@ npm i @nestjs/mapped-types --save
 npm install --save @nestjs/swagger
 
 npm install --save @nestjs/config
+
+## ANGULAR
+
+npm init
+
+npm install lite-server --save-dev
+
+npm start
+npm install font-awesome@4.7.0 --save
+
+
+WATCH CHANGES:
+```
+npm install --save-dev onchange@3.3.0
+npm install --save-dev parallelshell@3.0.1
 ```
 
 ## AUTHENTICATION ( no terminado, no hace falta instalar aún )

@@ -1,0 +1,33 @@
+<div  fxLayout = "column"
+      class="container"    >
+
+   
+  <div *ngIf="users">
+    <mat-list-item *ngFor="let user of users">
+      <mat-card class="name">
+        <h1>Owner's Name: {{user.name}} {{user.surname1}} {{user.surname2}}</h1>
+      </mat-card>
+      <div id="main">
+        <mat-list-item *ngFor="let account of user.accounts">
+          <mat-card class="account">
+            <h1>Account: {{account.name}} </h1>
+            <h1>Total left: {{account.totalMoney}} </h1>
+            <button mat-button  class="add" (click)="openAddBillForm(account.id, user.id)">ADD A
+              BILL</button>
+          </mat-card>
+          <div id="main">
+            <mat-list-item *ngFor="let operation of account.operations" [routerLink]="['/operationDetail',user.id,account.id,operation.id]" >
+              <mat-card class="operation" >
+                <h3 style="text-align:left;">{{operation.concept}}  <span style="float:right;">{{operation.amount}}$</span></h3>  
+              </mat-card>
+            </mat-list-item>
+          </div>  
+        </mat-list-item>
+      </div>
+    </mat-list-item>
+  </div>
+
+  <div [hidden]="users">
+    <mat-spinner></mat-spinner><h4>Loading...</h4>
+  </div>
+</div>
