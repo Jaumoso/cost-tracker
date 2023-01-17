@@ -1,0 +1,34 @@
+<div fxLayout="column" class="container">
+  <div *ngIf="user">
+    <table *ngFor="let account of user.accounts">
+      <tr class="tr">
+        <th colspan="3">{{ account.name }} Account</th>
+        <th> Total: {{account.totalMoney}}</th>
+      </tr>
+      <th> Operation ID:</th>
+      <th> Concept:</th>
+      <th> Amount Spent:</th>
+      <td><button mat-button (click)="openAddBillForm(account.id, user.id)"> Add a bill</button></td>
+
+      <tr *ngFor="let operation of account.operations">
+        <td style="width:70%">{{ operation.id }}</td>
+        <td style="width:70%">{{ operation.concept }}</td>
+        <td style="width:70%">{{ operation.amount }}</td>
+        <td><button mat-button  (click)="recoverOperation(user.id,account.id,operation)" > Recover Bill</button></td>
+
+      </tr>
+    </table>
+
+    <table *ngFor="let user of users" style="width:100%;">
+      <tr>
+        <th>
+          <h1>User: {{user.name}} {{user.surname1}}</h1>
+        </th>
+      </tr>
+
+    </table>
+  </div>
+  <div [hidden]="users">
+    <mat-spinner></mat-spinner><h4>Loading...</h4>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'variables';
+@import '../node_modules/font-awesome/scss/font-awesome';
+
+.container {
+    margin: 20px;
+    display:flex;
+}
+#main div{
+    margin: 5px;
+    display:flex;
+    flex-direction: column;
+  }
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Roboto', sans-serif; }

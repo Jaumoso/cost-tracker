@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
 import { CreateAccountDto } from 'src/account/dto/create-account.dto';
 import { UpdateAccountDto } from 'src/account/dto/update-account.dto';
@@ -125,11 +124,10 @@ export class AccountController {
     }
   }
 
-/*   @Get('/date/:id/:date1/:date2')
+  @Get('/date/:id/:date1/:date2')
   @ApiCreatedResponse({description: 'This function will get the Operations in a defined timeframe.'})
     async getOperationsByDate(@Res() response, @Param('id') accountId: string, @Param('date1') dateIntervalIni: string, @Param('date2') dateIntervalEnd: string,) {
     try {
-      dateIntervalIni
       const operationData = await this.accountService.getOperationsByDate(accountId, dateIntervalIni, dateIntervalEnd);
       return response.status(HttpStatus.OK).json({
         message: 'All operations data found successfully for date interval ' 
@@ -138,6 +136,6 @@ export class AccountController {
     catch (err) {
       return response.status(err.status).json(err.response);
     }
-  } */
+  }
 
 }

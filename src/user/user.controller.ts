@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
 import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
@@ -49,7 +48,7 @@ async getUsers(@Res() response) {
   try {
     const userData = await this.userService.getAllUsers();
     return response.status(HttpStatus.OK).json({
-      message: 'All users data found successfully',userData,});
+      /* message: 'All users data found successfully', */ userData,});
   } 
   catch (err) {
     return response.status(err.status).json(err.response);

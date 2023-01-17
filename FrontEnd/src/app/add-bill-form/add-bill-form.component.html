@@ -1,0 +1,32 @@
+<mat-toolbar color="primary">
+  Fill the form to add a new bill
+<span class="flex-spacer"></span>
+<button mat-button mat-dialog-close>&times;</button>
+</mat-toolbar>
+<div  >
+  <p> {{addbillform.value|json}} {{addbillform.status|json}}</p>
+  <form novalidate [formGroup]="addbillform" #fform="ngForm" (ngSubmit)="onSubmit()">
+    <p>
+      <mat-form-field class="half-width">
+        <label>Concept: </label>
+        <input matInput formControlName="concept" placeholder="Concept" type="text" required>
+        <mat-error *ngIf="addbillform.get('concept').hasError('required') &&addbillform.get('concept').touched">Concept is required</mat-error>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field class="half-width">
+        <label>Amount: </label>
+        <input matInput formControlName="amount" placeholder="Amount" type="number" required>
+        <mat-error *ngIf="addbillform.get('amount').hasError('required') || addbillform.get('amount').untouched">Concept is required</mat-error>
+
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field class="half-width">
+        <label>Date: </label>
+        <input matInput formControlName="date" placeholder="Date" type="date" required>
+      </mat-form-field>
+    </p>
+    <button mat-button color="primary" [disabled]="fform.form.invalid" type="submit"  >Submit</button>
+  </form>
+</div>
