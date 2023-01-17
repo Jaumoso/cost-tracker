@@ -12,11 +12,11 @@
           <mat-card class="account">
             <h1>Account: {{account.name}} </h1>
             <h1>Total left: {{account.totalMoney}} </h1>
-            <button mat-button  class="add" (click)="openAddBillForm(account.id, user.id)">ADD A
+            <button mat-button  class="add" (click)="openAddBillForm(account._id, user._id)">ADD A
               BILL</button>
           </mat-card>
           <div id="main">
-            <mat-list-item *ngFor="let operation of account.operations" [routerLink]="['/operationDetail',user.id,account.id,operation.id]" >
+            <mat-list-item *ngFor="let operation of account.operations" [routerLink]="['/operationDetail',user._id,account._id,operation._id]" >
               <mat-card class="operation" >
                 <h3 style="text-align:left;">{{operation.concept}}  <span style="float:right;">{{operation.amount}}$</span></h3>  
               </mat-card>

@@ -35,12 +35,16 @@ export class AddBillComponent implements OnInit {
   }
 
   onSubmit(){
-      this.userService.getMaxIdOper(this.userID,this.accountID).subscribe(operID => this.operation2.id = operID);  //with use of Observables
+      // this.userService.getMaxIdOper(this.userID,this.accountID).subscribe(operID => this.operation2.id = operID);  //with use of Observables
       // this.userService.getMaxIdOper(this.userID,this.accountID).then(operID => this.operation2.id = operID);  //with use of promises
       // this.operation2.id = this.userService.getMaxIdOper(this.userID,this.accountID);  //without use of promises
-      this.userService.addOperation(this.userID, this.accountID, this.operation2);
+      // this.userService.addOperation(this.userID, this.accountID, this.operation2);
+
+      this.userService.createOperation(this.operation2).subscribe(oper => this.operation2 = oper);
       this.operation2 = {id:'', concept:'', amount: 0, date: this.date.toLocaleDateString()};
-      // form.resetForm();
+
+
+
     }
 
 
