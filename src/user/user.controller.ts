@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
 import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';

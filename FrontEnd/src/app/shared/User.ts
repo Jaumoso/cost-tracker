@@ -1,6 +1,6 @@
 import { Account } from './Account';
 
-export class User{
+export class User {
    id: string;
    name: string;
    surname1: string;

@@ -1,6 +1,6 @@
 import { Operation } from './Operation';
 
-export class Account{    
+export class Account{
     id: string;
     name: string;
     totalMoney: number;
