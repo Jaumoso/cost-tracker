@@ -10,8 +10,8 @@ import { OperationModule } from './operation/operation.module';
 
 @Module({
   imports: [
-  /* MongooseModule.forRoot('mongodb+srv://Jaume:dC86qSZI3e2SR1Jn@costtracker.hbqfwlv.mongodb.net/test',{dbName: 'cost-tracker'}), */
-  MongooseModule.forRoot('mongodb://localhost:27017',{dbName: 'cost-tracker'}),
+  MongooseModule.forRoot('mongodb+srv://CostTrackerJaumEzzi:3MXUq6aeANqu5YkU@costtracker.hbqfwlv.mongodb.net/test',{dbName: 'cost-tracker'}),
+  // MongooseModule.forRoot('mongodb://localhost:27017',{dbName: 'cost-tracker'}),
   GoogleModule,
   UserModule,
   AccountModule,

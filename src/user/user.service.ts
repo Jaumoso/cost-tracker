@@ -33,7 +33,7 @@ export class UserService {
   }
 
   async getUser(userId: string): Promise<IUser> {
-    const existingUser = await     this.userModel.findById(userId).exec();
+    const existingUser = await     this.userModel.findById(userId).populate({path: 'accounts', populate: { path: 'operations'}});
     if (!existingUser) {
       throw new NotFoundException(`User #${userId} not found`);
     }

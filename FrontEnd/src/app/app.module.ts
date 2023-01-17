@@ -7,14 +7,14 @@ import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { AppRoutingModule} from './app-routing/app-routing.module';
-import {MatTableModule} from '@angular/material/table';
+import { AppRoutingModule } from './app-routing/app-routing.module';
+import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
-import { UserService} from './services/user.service';
+import { UserService } from './services/user.service';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -32,6 +32,7 @@ import { OperationDetailV2Component } from './operation-detail-v2/operation-deta
 import { BillsTableComponent } from './bills-table/bills-table.component';
 import { AddBillComponent } from './add-bill/add-bill.component';
 import { AddBillFormComponent } from './add-bill-form/add-bill-form.component';
+import { baseURL } from './shared/baseurl';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,7 @@ import { AddBillFormComponent } from './add-bill-form/add-bill-form.component';
     FlexLayoutModule,
     MatTableModule,
     AppRoutingModule,
-    MatFormFieldModule, 
+    MatFormFieldModule,
     MatInputModule,
     MatCheckboxModule,
     MatDialogModule,
@@ -69,8 +70,11 @@ import { AddBillFormComponent } from './add-bill-form/add-bill-form.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  entryComponents:[ AddBillFormComponent ],
-  providers: [UserService],
+  entryComponents: [AddBillFormComponent],
+  providers: [
+    UserService,
+    { provide: 'baseURL', useValue: baseURL }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
