@@ -48,8 +48,10 @@ async updateUser(@Res() response,@Param('id') userId: string, @Body() updateUser
 async getUsers(@Res() response) {
   try {
     const userData = await this.userService.getAllUsers();
-    return response.status(HttpStatus.OK).json({
-      message: 'All users data found successfully',userData,});
+    // return response.status(HttpStatus.OK).json({
+    //   message: 'All users data found successfully',userData,});
+    
+    return response.status(HttpStatus.OK).json({userData});
   } 
   catch (err) {
     return response.status(err.status).json(err.response);

@@ -36,7 +36,7 @@ export class AccountService {
   }
 
   async getAccount(accountId: string): Promise<IAccount> {
-    const existingAccount = await this.accountModel.findById(accountId).exec();
+    const existingAccount = await this.accountModel.findById(accountId).populate('operations');
     if (!existingAccount) {
       throw new NotFoundException(`Account #${accountId} not found`);
     }
