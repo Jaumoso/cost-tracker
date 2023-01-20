@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
@@ -12,8 +11,7 @@ export class UserService {
   constructor(@InjectModel('User') private userModel:Model<IUser>) { }
 
   async createUser(createUserDto: CreateUserDto): Promise<IUser> {
-    const newUser = await new this.userModel(createUserDto);
-    return newUser.save();
+    return await new this.userModel(createUserDto).save();
   }
 
   async updateUser(userId: string, updateUserDto: UpdateUserDto): Promise<IUser> {
