@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Operation } from '../shared/Operation';
 import { UserService } from '../services/user.service';
+import { Account } from '../shared/Account';
 
 @Component({
   selector: 'app-add-bill-form',
@@ -15,6 +16,9 @@ export class AddBillFormComponent implements OnInit {
 
   addbillform: FormGroup;
   bill: Operation;
+  errMess: string;
+  accountCopy: Account;
+
 
   constructor(private userService: UserService,
               private formbuilder: FormBuilder,
@@ -31,7 +35,6 @@ export class AddBillFormComponent implements OnInit {
 
   createForm() {
     this.addbillform = this.formbuilder.group({
-      id: '',
       date: ['',Validators.required],
       concept: ['',Validators.required],
       amount:[0, Validators.required]
@@ -40,13 +43,30 @@ export class AddBillFormComponent implements OnInit {
 
   onSubmit(){
     this.bill=this.addbillform.value;
-    this.userService.getMaxIdOper(this.data.usID,this.data.accID).subscribe(billID => this.bill.id =billID); 
+    // this.userService.getMaxIdOper(this.data.usID,this.data.accID).subscribe(billID => this.bill.id =billID); 
     // this.userService.getMaxIdOper(this.data.usID,this.data.accID).then(billID => this.bill.id =billID); 
     // this.bill.id = this.userService.getMaxIdOper(this.data.usID,this.data.accID); 
-    this.userService.addOperation(this.data.usID, this.data.accID, this.bill);
-    console.log("bill is: " +this.bill);
+    // this.userService.addOperation(this.data.usID, this.data.accID, this.bill);
+    // console.log("bill is: " +this.bill);
+
+    this.userService.createOperation(this.bill)
+      .subscribe(
+        oper => {
+          this.bill = oper;
+          this.userService.getAccount(this.data.accID).subscribe(
+            acc => {
+              this.accountCopy = acc;
+              this.accountCopy = this.userService.addOperToAccount(this.accountCopy, this.bill);
+              this.userService.editAccount(this.accountCopy).subscribe(
+                acc => this.accountCopy = acc
+              )
+            }
+          );
+        },
+        err => this.errMess = err
+      );
+
     this.addbillform.reset({
-      id: '',
       date: '',
       concept: '',
       amount:0

@@ -1,6 +1,6 @@
 <mat-card class="account">
 
-  <div style="text-align: left;">
+  <div style="text-align: left;" *ngIf="operation">
     <h3>Concept:  {{operation.concept}}</h3>
     <h3>Total:    {{operation.amount}}</h3>
     <h3>Date:     {{operation.date}}</h3>
@@ -10,5 +10,5 @@
   <button mat-button [routerLink]="['/operationDetail',userID, accountID, next]"><span class="fa fa-chevron-right fa-lg"></span></button>
 
 </mat-card>
-<button mat-flat-button style="float:inline-start;" (click)="recoverOperation(user.id,account.id,operation)">RecoverBill</button>
+<button mat-flat-button style="float:inline-start;" (click)="recoverOperation(userID,accountID,operation)">RecoverBill</button>
 <button mat-flat-button style="float:inline-start;" (click)="goBack()">BACK</button>

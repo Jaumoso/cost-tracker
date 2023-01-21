@@ -12,10 +12,10 @@
             <h1>Account: {{account.name}} </h1>
             <h1>Total left: {{account.totalMoney}} </h1>
             <mat-card-actions>
-              <button mat-button *ngIf="!acc || acc.id != account.id" class="add" (click)="selectAccount(account)">ADD A
+              <button mat-button *ngIf="!acc || acc._id != account._id" class="add" (click)="selectAccount(account)">ADD A
                 BILL</button>
-              <div *ngIf="acc && acc.id === account.id">
-                <app-add-bill [userID]="user.id" [accountID]="account.id"></app-add-bill>
+              <div *ngIf="acc && acc._id === account._id">
+                <app-add-bill [userID]="user._id" [accountID]="account._id"></app-add-bill>
                 <mat-card-actions>
                   <button mat-button class="cancel" (click)="unselectAccount()">Cancel</button>
                 </mat-card-actions>
@@ -32,7 +32,7 @@
                 </mat-card-actions>
                 <mat-card *ngIf="!!oper && oper._id == operation._id && accOP._id ==account._id">
                   <app-operation-detail [operation]="operation"></app-operation-detail>
-                  <button mat-flat-button (click)="recoverOperation(user.id,account.id,operation)">Recover Bill</button>
+                  <button mat-flat-button (click)="recoverOperation(user._id,account._id,operation)">Recover Bill</button>
                   <button mat-flat-button (click)="onSelectLess();unselectAccountOperation();">LESS DETAILS</button>
                 </mat-card>
               </mat-card>

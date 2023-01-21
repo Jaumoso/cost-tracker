@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { User } from '../shared/User';
-import { Account} from '../shared/Account';
-import { Operation} from '../shared/Operation';
+import { Account } from '../shared/Account';
+import { Operation } from '../shared/Operation';
 import { Params, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { switchMap } from 'rxjs/operators';
@@ -20,11 +20,11 @@ export class OperationDetailV2Component implements OnInit {
   prev: string;
   next: string;
 
-  operationID:number;
-  userID:number;
-  accountID :number;
+  operationID: number;
+  userID: number;
+  accountID: number;
 
-  user:User;
+  user: User;
 
   @Input()
   operation: Operation;
@@ -39,9 +39,9 @@ export class OperationDetailV2Component implements OnInit {
     this.accountID = this.route.snapshot.params['accountID'];
     this.operationID = this.route.snapshot.params['operationID'];
 
-    console.log("userid: "+this.userID);
-    console.log("accountID: "+this.accountID);
-    console.log("operationID: "+this.operationID);
+    console.log("userid: " + this.userID);
+    console.log("accountID: " + this.accountID);
+    console.log("operationID: " + this.operationID);
 
     // // this.user = this.userService.getUser(userID.toString());
     // this.userService.getUser(this.userID.toString()).subscribe(usario => this.user = usario);
@@ -55,36 +55,35 @@ export class OperationDetailV2Component implements OnInit {
     // this.userService.getOperationsIds(this.userID.toString(),this.accountID.toString()).subscribe(operationsids => this.operationsIDs = operationsids);
     // console.log("operation.id"+this.operationsIDs);
     this.userService.getOperation(
-          this.userID.toString(),
-          this.accountID.toString(),
-          this.operationID.toString())
-            .subscribe(operation => this.operation = operation);
+      this.userID.toString(),
+      this.accountID.toString(),
+      this.operationID.toString())
+      .subscribe(operation => this.operation = operation);
 
     this.userService.getOperationsIds(this.accountID.toString()).
-      subscribe(operationsids =>
-        {
-          console.log(operationsids);
-          this.operationsIDs = operationsids;
-          console.log("operation.id " +this.operationsIDs);
-        });
-        console.log("operation.id " +this.operationsIDs);
+      subscribe(operationsids => {
+        console.log(operationsids);
+        this.operationsIDs = operationsids;
+        console.log("operation.id " + this.operationsIDs);
+      });
+    console.log("operation.id " + this.operationsIDs);
 
 
 
     this.route.params
       .pipe(
-        switchMap((params:Params) => this.userService.getOperation(
+        switchMap((params: Params) => this.userService.getOperation(
           this.userID.toString(),
           this.accountID.toString(),
           params['operationID'].toString())
-        )).subscribe(operation => {this.operation = operation;this.setPrevNext(operation._id);});
-        
+        )).subscribe(operation => { this.operation = operation; this.setPrevNext(operation._id); });
+
 
 
   }
 
   setPrevNext(operationId: string) {
-    console.log("index: "+operationId);
+    console.log("index: " + operationId);
     const index = this.operationsIDs.indexOf(operationId);
     this.prev = this.operationsIDs[(this.operationsIDs.length + index - 1) % this.operationsIDs.length];
     this.next = this.operationsIDs[(this.operationsIDs.length + index + 1) % this.operationsIDs.length];
@@ -95,8 +94,26 @@ export class OperationDetailV2Component implements OnInit {
     this.location.go("view2");
     window.location.reload(); //no entiendo porque no funciona sin refrescar la pagina
   }
-  recoverOperation(userID:string, accountID: string, operation:Operation):void {
-    this.userService.recoverOperation(userID,accountID, operation);
-    this.location.back();
+  recoverOperation(userID: string, accountID: string, operation: Operation): void {
+    const operAmount = operation.amount;
+    this.userService.deleteOperation(operation).subscribe(
+      oper => {
+        this.userService.getAccount(accountID).subscribe(
+          acc => {
+            console.log("the operation: ", acc.totalMoney, "-", operAmount);
+            acc.totalMoney -= operAmount;
+            console.log("account after removing operation= ", acc);
+            this.userService.editAccount(acc).subscribe(
+              account => acc = account
+            )
+          }
+        )
+        operation = oper
+      }
+    )
+    this.location.go("view2");
+    // window.location.reload(); 
+    // this.userService.recoverOperation(userID,accountID, operation);
+    // this.location.back();
   }
 }

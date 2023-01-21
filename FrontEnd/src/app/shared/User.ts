@@ -1,7 +1,7 @@
 import { Account } from './Account';
 
 export class User {
-   id: string;
+   _id?: string;
    name: string;
    surname1: string;
    surname2: string;
