@@ -23,12 +23,12 @@ export class BillsTableComponent implements OnInit {
   displayedColumns: string[] = ['name', 'email'];
   constructor(private userService: UserService,
     public dialog: MatDialog,
-    @Inject('baseURL') private baseURL) { 
+    @Inject('baseURL') private baseURL) {
     // console.log(userService.getUsers());
   }
 
   ngOnInit() {
-    this.userService.getUsers().subscribe(usuarios => {this.users = usuarios;  console.log(this.users)});
+    this.userService.getUsers().subscribe(usuarios => { this.users = usuarios; console.log(this.users) });
     // this.user= this.users.filter(user => user)[0]; 
     // console.log(this.user);
     this.userService.getUser('63a175d0fab382593f7d265c').subscribe(usario => this.user = usario);
@@ -52,7 +52,23 @@ export class BillsTableComponent implements OnInit {
   }
 
   recoverOperation(userID: string, accountID: string, operation: Operation): void {
-    this.userService.recoverOperation(userID, accountID, operation);
+    const operAmount = operation.amount;
+    this.userService.deleteOperation(operation).subscribe(
+      oper => {
+        this.userService.getAccount(accountID).subscribe(
+          acc => {
+            console.log("the operation: ", acc.totalMoney, "-", operAmount);
+            acc.totalMoney -= operAmount;
+            console.log("account after removing operation= ", acc);
+            this.userService.editAccount(acc).subscribe(
+              account => acc = account
+            )
+          }
+        )
+        operation = oper
+      }
+    )
+    // this.userService.recoverOperation(userID, accountID, operation);
   }
 
 }
