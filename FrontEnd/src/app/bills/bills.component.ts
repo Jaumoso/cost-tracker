@@ -39,6 +39,10 @@ export class BillsComponent implements OnInit {
   selectAccount(account: Account): void {
     this.acc = account;
   }
+  
+  selectUsers(users: User[]): void {
+    this.users = users;
+  }
 
   unselectAccount(): void {
     this.acc = null;
@@ -59,7 +63,15 @@ export class BillsComponent implements OnInit {
           acc => {
             acc.totalMoney -= operAmount;
             this.userService.editAccount(acc).subscribe(
-              account => acc = account
+              account => {
+                acc = account;
+                this.userService.getUsers().subscribe(
+                  users => {
+                    this.users= users;
+                    // console.log("recover :", this.users)
+                  }
+                )
+              }
             )
           }
         )

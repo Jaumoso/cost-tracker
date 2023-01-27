@@ -12,27 +12,49 @@ import { AddBillFormComponent } from '../add-bill-form/add-bill-form.component';
 })
 export class BillsV2Component implements OnInit {
 
-  users: User[] ;
+  users: User[];
+  user: User;
 
-  constructor(private userService: UserService,public dialog: MatDialog) { }
+  constructor(private userService: UserService,
+    public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.userService.getUsers().subscribe(usuarios => this.users = usuarios);
+    
+    setTimeout(() => {
+      this.userService.getUsers().subscribe(
+        usuarios => { this.users = usuarios;
+        console.log("here we go: ",usuarios);}
+      );
+      
+    }, 500);
     // this.userService.getUsers().then(usuarios => this.users = usuarios);
     // this.users = this.userService.getUsers();
-    
-    
+
+
   }
-  openAddBillForm(accountID: string, userID: string):void{
-    this.dialog.open(AddBillFormComponent,{
+  openAddBillForm(accountID: string, userID: string): void {
+
+    const dialogRef = this.dialog.open(AddBillFormComponent, {
       data: {
         accID: accountID,
         usID: userID
       },
-     width:"800px",
-     height: "600px"
+      width: "800px",
+      height: "600px"
     });
-    
+
+    dialogRef.afterClosed().subscribe(
+      usuario => {      //how to do it with out declaring, usuario?
+        this.user = usuario;
+        this.userService.getUsers().subscribe(
+          users => {
+            this.users = users;
+          }
+        );
+      }
+    )
+
+
   }
 
 }

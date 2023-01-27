@@ -108,7 +108,7 @@ export class UserService {
 
 
   getOperationsIds(accountId: string): Observable<string[]> {
-    console.log(accountId);
+    console.log("Account ID: ", accountId);
     return this.http.get<{ existingAccount: Account }>(baseURL + 'account/' + accountId)
       .pipe(
         map(acc => acc.existingAccount.operations.map(operation => operation._id))
@@ -126,12 +126,12 @@ export class UserService {
   }
 
   getAccount(accountId: string): Observable<Account> {
-    console.log("function getAccount",accountId);
     return this.http.get<{ existingAccount: Account }>(baseURL + 'account/' + accountId)
-      .pipe(
+    .pipe(
         map(acc => acc.existingAccount)
-      )
-      .pipe(catchError(this.processHTTPMsgService.handleError));
+        )
+        .pipe(catchError(this.processHTTPMsgService.handleError));
+        // console.log("function getAccount",accountId);
     // return of(USERS.filter(usuario=> usuario._id ==userId)[0].accounts.filter(account => account._id == accountId)[0].operations.map(operation => operation._id));//with observables
   }
 
@@ -185,7 +185,7 @@ export class UserService {
         'Content-Type': 'application/json'
       })
     };
-    console.log("function editAccount: ", account);
+    // console.log("function editAccount: ", account);
     return this.http.put<{existingAccount:Account}>(baseURL + 'account/' + account._id, account, httpOptions)
     .pipe(map(acc => acc.existingAccount))
     .pipe(catchError(this.processHTTPMsgService.handleError));
@@ -203,7 +203,17 @@ export class UserService {
     .pipe(catchError(this.processHTTPMsgService.handleError));
   }
 
-
+  editUser(usuario: User): Observable<User> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    // console.log("function editUser: ", usuario);
+    return this.http.put<{existingUser:User}>(baseURL + 'user/' + usuario._id, usuario, httpOptions)
+    .pipe(map(user => user.existingUser))
+    .pipe(catchError(this.processHTTPMsgService.handleError));
+  }
 
 
 }

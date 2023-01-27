@@ -1,14 +1,17 @@
 <mat-card class="account">
 
   <div style="text-align: left;" *ngIf="operation">
-    <h3>Concept:  {{operation.concept}}</h3>
-    <h3>Total:    {{operation.amount}}</h3>
-    <h3>Date:     {{operation.date}}</h3>
+    <h3>Concept: {{operation.concept}}</h3>
+    <h3>Total: {{operation.amount}}</h3>
+    <h3>Date: {{operation.date}}</h3>
   </div>
-  <button mat-button [routerLink]="['/operationDetail', userID, accountID, prev]"><span class="fa fa-chevron-left fa-lg"></span></button>
+  <button mat-button [routerLink]="['/operationDetail', userID, accountID, prev]"><span
+      class="fa fa-chevron-left fa-lg"></span></button>
   <span class="flex-spacer"></span>
-  <button mat-button [routerLink]="['/operationDetail',userID, accountID, next]"><span class="fa fa-chevron-right fa-lg"></span></button>
+  <button mat-button [routerLink]="['/operationDetail',userID, accountID, next]"><span
+      class="fa fa-chevron-right fa-lg"></span></button>
 
 </mat-card>
-<button mat-flat-button style="float:inline-start;" (click)="recoverOperation(userID,accountID,operation)">RecoverBill</button>
-<button mat-flat-button style="float:inline-start;" (click)="goBack()">BACK</button>
+<button mat-flat-button style="float:inline-start;"
+  (click)="recoverOperation(userID,accountID,operation)">RecoverBill</button>
+<button mat-flat-button style="float:inline-start;" routerLink="/view2">BACK</button>

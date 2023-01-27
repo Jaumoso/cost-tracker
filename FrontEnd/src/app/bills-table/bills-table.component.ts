@@ -16,8 +16,6 @@ export class BillsTableComponent implements OnInit {
 
   users: User[];
   user: User;
-  // accounts: Account[];
-  // operations: Operation[];
   operation2: Operation;
 
   displayedColumns: string[] = ['name', 'email'];
@@ -32,7 +30,6 @@ export class BillsTableComponent implements OnInit {
     // this.user= this.users.filter(user => user)[0]; 
     // console.log(this.user);
     this.userService.getUser('63a175d0fab382593f7d265c').subscribe(usario => this.user = usario);
-    console.log(this.user);
 
     // this.userService.getUsers().then(usuarios => this.users = usuarios);
     // this.userService.getUser('1').then(usario => this.user = usario);
@@ -41,7 +38,7 @@ export class BillsTableComponent implements OnInit {
   }
 
   openAddBillForm(accountID: string, userID: string): void {
-    this.dialog.open(AddBillFormComponent, {
+    const dialogRef = this.dialog.open(AddBillFormComponent, {
       data: {
         accID: accountID,
         usID: userID
@@ -49,6 +46,16 @@ export class BillsTableComponent implements OnInit {
       width: "800px",
       height: "600px"
     });
+
+    console.log("Before user: ", this.user);
+    
+    dialogRef.afterClosed().subscribe(
+      newUser => {
+        this.user = newUser;
+        console.log("NewUser: ", newUser);
+      }
+    )
+
   }
 
   recoverOperation(userID: string, accountID: string, operation: Operation): void {
@@ -61,7 +68,12 @@ export class BillsTableComponent implements OnInit {
             acc.totalMoney -= operAmount;
             console.log("account after removing operation= ", acc);
             this.userService.editAccount(acc).subscribe(
-              account => acc = account
+              account => {
+                acc = account;
+                this.userService.getUser(userID).subscribe(
+                  user => { this.user = user }
+                )
+              }
             )
           }
         )

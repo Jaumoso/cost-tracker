@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { User } from '../shared/User';
 import { Account } from '../shared/Account';
@@ -19,6 +19,13 @@ export class AddBillComponent implements OnInit {
 
   @Input()
   accountID: string;
+
+  @Output()
+  newAccountEvent = new EventEmitter<Account>();
+
+  @Output()
+  newUsersEvent = new EventEmitter<User[]>();
+
 
   errMess: string;
   id: string;
@@ -58,16 +65,37 @@ export class AddBillComponent implements OnInit {
               this.accountCopy = acc;
               this.accountCopy = this.userService.addOperToAccount(this.accountCopy, this.operation2);
               this.userService.editAccount(this.accountCopy).subscribe(
-                acc => this.accountCopy = acc
+                acc => {
+                  this.accountCopy = acc;
+                  this.userService.getUser(this.userID).subscribe(
+                    user => {
+                      this.user = user;
+                      this.userService.editUser(user).subscribe(
+                        usuario => {
+                          this.user = usuario;
+                          // console.log(usuario, "user: ", user);
+                          this.userService.getUsers().subscribe(
+                            usuarios => {
+                              // console.log("usarios: ", usuarios);
+                              this.newAccountEvent.emit(null);
+                              this.newUsersEvent.emit(usuarios);
+                            }
+
+                          )
+                        }
+                      )
+                    }
+                  );
+                }
               )
             }
           );
         },
         err => this.errMess = err
       );
-      // this.userService.getMaxIdOper(this.userID,this.accountID).subscribe(operID => this.operation2.id = operID);  //with use of Observables
-      // this.userService.getMaxIdOper(this.userID,this.accountID).then(operID => this.operation2.id = operID);  //with use of promises
-      // this.operation2.id = this.userService.getMaxIdOper(this.userID,this.accountID);  //without use of promises
-      // this.userService.addOperation(this.userID, this.accountID, this.operation2);
+    // this.userService.getMaxIdOper(this.userID,this.accountID).subscribe(operID => this.operation2.id = operID);  //with use of Observables
+    // this.userService.getMaxIdOper(this.userID,this.accountID).then(operID => this.operation2.id = operID);  //with use of promises
+    // this.operation2.id = this.userService.getMaxIdOper(this.userID,this.accountID);  //without use of promises
+    // this.userService.addOperation(this.userID, this.accountID, this.operation2);
   }
 }

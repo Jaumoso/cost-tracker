@@ -3,10 +3,10 @@ import { UserService } from '../services/user.service';
 import { User } from '../shared/User';
 import { Account } from '../shared/Account';
 import { Operation } from '../shared/Operation';
-import { Params, ActivatedRoute } from '@angular/router';
+import { Params, ActivatedRoute, Router, } from '@angular/router';
 import { Location } from '@angular/common';
 import { switchMap } from 'rxjs/operators';
-import { BillsV2Component } from '../bills-v2/bills-v2.component';
+
 
 @Component({
   selector: 'app-operation-detail-v2',
@@ -31,7 +31,8 @@ export class OperationDetailV2Component implements OnInit {
 
   constructor(private userService: UserService,
     private route: ActivatedRoute,
-    private location: Location) { }
+    private location: Location,
+    private router: Router) { }
 
 
   ngOnInit() {
@@ -39,9 +40,6 @@ export class OperationDetailV2Component implements OnInit {
     this.accountID = this.route.snapshot.params['accountID'];
     this.operationID = this.route.snapshot.params['operationID'];
 
-    console.log("userid: " + this.userID);
-    console.log("accountID: " + this.accountID);
-    console.log("operationID: " + this.operationID);
 
     // // this.user = this.userService.getUser(userID.toString());
     // this.userService.getUser(this.userID.toString()).subscribe(usario => this.user = usario);
@@ -62,11 +60,8 @@ export class OperationDetailV2Component implements OnInit {
 
     this.userService.getOperationsIds(this.accountID.toString()).
       subscribe(operationsids => {
-        console.log(operationsids);
         this.operationsIDs = operationsids;
-        console.log("operation.id " + this.operationsIDs);
       });
-    console.log("operation.id " + this.operationsIDs);
 
 
 
@@ -83,17 +78,14 @@ export class OperationDetailV2Component implements OnInit {
   }
 
   setPrevNext(operationId: string) {
-    console.log("index: " + operationId);
+    console.log("Operation id: " + operationId);
+    console.log("Operation ids: " + this.operationsIDs);
+    console.log("Index: " + this.operationsIDs.indexOf(operationId));
     const index = this.operationsIDs.indexOf(operationId);
     this.prev = this.operationsIDs[(this.operationsIDs.length + index - 1) % this.operationsIDs.length];
     this.next = this.operationsIDs[(this.operationsIDs.length + index + 1) % this.operationsIDs.length];
   }
 
-  goBack(): void {
-    // this.location.back();
-    this.location.go("view2");
-    window.location.reload(); //no entiendo porque no funciona sin refrescar la pagina
-  }
   recoverOperation(userID: string, accountID: string, operation: Operation): void {
     const operAmount = operation.amount;
     this.userService.deleteOperation(operation).subscribe(
@@ -104,16 +96,31 @@ export class OperationDetailV2Component implements OnInit {
             acc.totalMoney -= operAmount;
             console.log("account after removing operation= ", acc);
             this.userService.editAccount(acc).subscribe(
-              account => acc = account
+              account => {
+                console.log("account =", account, " acc: ", acc);
+                acc = account;
+                this.userService.getUser(userID).subscribe(
+                  user =>{
+                    console.log("final user:", user);
+                    
+                  }
+                )
+              }
+
             )
           }
         )
-        operation = oper
+        operation = oper;
+        this.router.navigate(['/view2']);
       }
     )
-    this.location.go("view2");
-    // window.location.reload(); 
+
     // this.userService.recoverOperation(userID,accountID, operation);
-    // this.location.back();
   }
 }
+
+    // goBack(): void {
+    //   // this.location.back();
+    //   this.location.go("view2");
+    //   window.location.reload(); //no entiendo porque no funciona sin refrescar la pagina
+    // }
