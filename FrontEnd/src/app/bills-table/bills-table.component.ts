@@ -16,23 +16,20 @@ export class BillsTableComponent implements OnInit {
 
   users: User[];
   user: User;
-  // accounts: Account[];
-  // operations: Operation[];
   operation2: Operation;
 
   displayedColumns: string[] = ['name', 'email'];
   constructor(private userService: UserService,
     public dialog: MatDialog,
-    @Inject('baseURL') private baseURL) { 
+    @Inject('baseURL') private baseURL) {
     // console.log(userService.getUsers());
   }
 
   ngOnInit() {
-    this.userService.getUsers().subscribe(usuarios => {this.users = usuarios;  console.log(this.users)});
+    this.userService.getUsers().subscribe(usuarios => { this.users = usuarios; console.log(this.users) });
     // this.user= this.users.filter(user => user)[0]; 
     // console.log(this.user);
     this.userService.getUser('63a175d0fab382593f7d265c').subscribe(usario => this.user = usario);
-    console.log(this.user);
 
     // this.userService.getUsers().then(usuarios => this.users = usuarios);
     // this.userService.getUser('1').then(usario => this.user = usario);
@@ -41,7 +38,7 @@ export class BillsTableComponent implements OnInit {
   }
 
   openAddBillForm(accountID: string, userID: string): void {
-    this.dialog.open(AddBillFormComponent, {
+    const dialogRef = this.dialog.open(AddBillFormComponent, {
       data: {
         accID: accountID,
         usID: userID
@@ -49,10 +46,41 @@ export class BillsTableComponent implements OnInit {
       width: "800px",
       height: "600px"
     });
+
+    console.log("Before user: ", this.user);
+    
+    dialogRef.afterClosed().subscribe(
+      newUser => {
+        this.user = newUser;
+        console.log("NewUser: ", newUser);
+      }
+    )
+
   }
 
   recoverOperation(userID: string, accountID: string, operation: Operation): void {
-    this.userService.recoverOperation(userID, accountID, operation);
+    const operAmount = operation.amount;
+    this.userService.deleteOperation(operation).subscribe(
+      oper => {
+        this.userService.getAccount(accountID).subscribe(
+          acc => {
+            console.log("the operation: ", acc.totalMoney, "-", operAmount);
+            acc.totalMoney -= operAmount;
+            console.log("account after removing operation= ", acc);
+            this.userService.editAccount(acc).subscribe(
+              account => {
+                acc = account;
+                this.userService.getUser(userID).subscribe(
+                  user => { this.user = user }
+                )
+              }
+            )
+          }
+        )
+        operation = oper
+      }
+    )
+    // this.userService.recoverOperation(userID, accountID, operation);
   }
 
 }

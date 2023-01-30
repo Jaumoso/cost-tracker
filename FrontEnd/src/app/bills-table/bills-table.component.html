@@ -17,14 +17,14 @@
       <th> Concept:</th>
       <th> Amount Spent:</th>
       <th> Location:</th>
-      <td><button mat-button (click)="openAddBillForm(account.id, user.id)"> Add a bill</button></td>
+      <td><button mat-button (click)="openAddBillForm(account._id, user._id)"> Add a bill</button></td>
 
       <tr *ngFor="let operation of account.operations">
         <td style="width:70%">{{ operation.date }}</td>
         <td style="width:70%">{{ operation.concept }}</td>
         <td style="width:70%">{{ operation.amount }}</td>
         <td style="width:70%">{{ operation.location }}</td>
-        <td><button mat-button (click)="recoverOperation(user.id,account.id,operation)"> Recover Bill</button></td>
+        <td><button mat-button (click)="recoverOperation(user._id,account._id,operation)"> Recover Bill</button></td>
 
       </tr>
     </table>

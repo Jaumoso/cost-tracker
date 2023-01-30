@@ -30,7 +30,7 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
             'Content-Type': 'application/json'
           })
         };
-        return this.http.post<Account>(baseURL + 'account/new/' + account.id, account, httpOptions)
+        return this.http.post<Account>(baseURL + 'account/new/' + account._id, account, httpOptions)
         .pipe(catchError(this.processHTTPMsgService.handleError));
     }
 
@@ -40,7 +40,7 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
             'Content-Type': 'application/json'
           })
         };
-        return this.http.put<Account>(baseURL + 'account/edit/' + account.id, account, httpOptions)
+        return this.http.put<Account>(baseURL + 'account/edit/' + account._id, account, httpOptions)
         .pipe(catchError(this.processHTTPMsgService.handleError));
     }
 

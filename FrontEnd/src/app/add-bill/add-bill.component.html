@@ -1,11 +1,11 @@
-<div style="width: 100%;" >
+<div style="width: 100%;" *ngIf="userID">
   <mat-toolbar color="secondary">
     Add Bill
   <span class="flex-spacer"></span>
   </mat-toolbar>
   <mat-card class="flex-spacer" fxLayout="row" fxLayoutGap="100px">
     <p >hola: {{ operation2 | json }} </p>
-    <form novalidate #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+    <form novalidate #loginForm="ngForm" (ngSubmit)="onSubmit()">
       <mat-dialog-content>
         <p>
           <mat-form-field>
