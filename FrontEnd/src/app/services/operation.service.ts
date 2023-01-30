@@ -24,13 +24,13 @@ import { Operation } from '../shared/Operation';
         .pipe(catchError(this.processHTTPMsgService.handleError));
     }
 
-    createOperation(operation: Operation): Observable<Operation> {
+    createOperation(accountId: string, operation: Operation): Observable<Operation> {
         const httpOptions = {
           headers: new HttpHeaders({
             'Content-Type': 'application/json'
           })
         };
-        return this.http.post<Operation>(baseURL + 'operation/new/' + operation.id, operation, httpOptions)
+        return this.http.post<Operation>(baseURL + 'operation/new/' + accountId, operation, httpOptions)
         .pipe(catchError(this.processHTTPMsgService.handleError));
     }
 
