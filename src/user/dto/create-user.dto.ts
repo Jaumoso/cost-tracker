@@ -16,7 +16,7 @@ export class CreateUserDto {
   @MaxLength(30)
   @MinLength(2)
   @IsNotEmpty()
-  readonly name: string;
+  name: string;
 
   @ApiProperty({
     type: String,
@@ -24,7 +24,7 @@ export class CreateUserDto {
   })
   @IsString()
   @MaxLength(30)
-  readonly surname1: string;
+  surname1: string;
 
   @ApiProperty({
     type: String,
@@ -32,7 +32,7 @@ export class CreateUserDto {
   })
   @IsString()
   @MaxLength(30)
-  readonly surname2?: string;
+  surname2?: string;
 
   @ApiProperty({ 
     type: String, 
@@ -41,7 +41,7 @@ export class CreateUserDto {
   })
   @IsEmail()
   @IsNotEmpty()
-  readonly email: string;
+  email: string;
 
   
   @ApiProperty({ 
@@ -52,7 +52,7 @@ export class CreateUserDto {
   @IsString()
   @MinLength(8)
   @IsNotEmpty()
-  readonly password: string;
+  password: string;
 
   @ApiProperty({
     type: [mongoose.Types.ObjectId],

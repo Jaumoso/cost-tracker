@@ -7,6 +7,7 @@ import { GoogleModule } from './google/google.module';
 import { UserModule } from './user/user.module';
 import { AccountModule } from './account/account.module';
 import { OperationModule } from './operation/operation.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { OperationModule } from './operation/operation.module';
   UserModule,
   AccountModule,
   OperationModule,
+  AuthModule,
 ],
   controllers: [
     AppController, 

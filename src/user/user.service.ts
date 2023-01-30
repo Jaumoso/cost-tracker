@@ -4,18 +4,26 @@ import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { UpdateUserDto } from 'src/user/dto/update-user.dto';
 import { IUser } from 'src/user/interfaces/user.interface';
 import { Model } from "mongoose";
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
   
   constructor(@InjectModel('User') private userModel:Model<IUser>) { }
 
-  async createUser(createUserDto: CreateUserDto): Promise<IUser> {
-    return await new this.userModel(createUserDto).save();
-  }
+  async createUser(userDto: CreateUserDto ): Promise<IUser> {
+    const saltOrRounds = 10;
+    const hashedPassword = await bcrypt.hash(userDto.password, saltOrRounds);
+    userDto.password = hashedPassword;
+    const newUser = await this.userModel.create(userDto);
+    if (!newUser) {
+        throw new NotFoundException('Could not create user!');
+    }
+    return newUser;
+}
 
   async updateUser(userId: string, updateUserDto: UpdateUserDto): Promise<IUser> {
-      const existingUser = await        this.userModel.findByIdAndUpdate(userId, updateUserDto, { new: true });
+      const existingUser = await this.userModel.findByIdAndUpdate(userId, updateUserDto, { new: true });
     if (!existingUser) {
       throw new NotFoundException(`User #${userId} not found`);
     }
@@ -34,6 +42,14 @@ export class UserService {
     const existingUser = await     this.userModel.findById(userId).populate({path: 'accounts', populate: { path: 'operations'}});
     if (!existingUser) {
       throw new NotFoundException(`User #${userId} not found`);
+    }
+    return existingUser;
+  }
+
+  async findUser(email: string): Promise<IUser> {
+    const existingUser = this.userModel.findOne({username: email})
+    if (!existingUser) {
+      throw new NotFoundException(`User #${email} not found`);
     }
     return existingUser;
   }
