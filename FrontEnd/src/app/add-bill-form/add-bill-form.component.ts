@@ -41,7 +41,7 @@ export class AddBillFormComponent implements OnInit {
     this.addbillform = this.formbuilder.group({
       date: ['', Validators.required],
       concept: ['', Validators.required],
-      amount: [0, Validators.required]
+      amount: [null, Validators.required]
     });
   }
 
@@ -73,7 +73,7 @@ export class AddBillFormComponent implements OnInit {
                           this.addbillform.reset({
                             date: '',
                             concept: '',
-                            amount: 0
+                            amount: null
                           });
                           this.addbillFormDirective.reset();
                           this.dialogRef.close(user);

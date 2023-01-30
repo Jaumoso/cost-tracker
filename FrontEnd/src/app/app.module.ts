@@ -33,6 +33,7 @@ import { BillsTableComponent } from './bills-table/bills-table.component';
 import { AddBillComponent } from './add-bill/add-bill.component';
 import { AddBillFormComponent } from './add-bill-form/add-bill-form.component';
 import { baseURL } from './shared/baseurl';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { baseURL } from './shared/baseurl';
     BillsTableComponent,
     AddBillComponent,
     AddBillFormComponent,
+    LoginComponent,
 
   ],
   imports: [
