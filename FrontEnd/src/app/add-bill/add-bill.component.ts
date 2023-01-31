@@ -35,7 +35,7 @@ export class AddBillComponent implements OnInit {
   users: User[];
   date = new Date();
   operID = '';
-  operation2: Operation = { concept: '', amount: 0, date: this.date.toLocaleDateString() };
+  operation2: Operation = { concept: '', amount: null, date: this.date.toLocaleDateString() };
   accounts: Account[];
 
   constructor(private userService: UserService) { }

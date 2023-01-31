@@ -164,9 +164,13 @@ export class UserService {
     }
   }
 
+  login(formData: {username: string, password: string}): Observable<{token: string}> {
+    return this.http.post<{token: string}>(baseURL+'/login', formData);
+  }
 
 
 
+  //j edited and modified 
 
   createOperation(operation: Operation): Observable<Operation> {
     const httpOptions = {
@@ -214,6 +218,7 @@ export class UserService {
     .pipe(map(user => user.existingUser))
     .pipe(catchError(this.processHTTPMsgService.handleError));
   }
+
 
 
 }
