@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
@@ -33,7 +32,7 @@ async function bootstrap() {
     const document = SwaggerModule.createDocument(app, config, options);
     SwaggerModule.setup('api', app, document, customOptions);
 
-  app.enableCors();
+  /* app.enableCors(); */
   await app.listen(3000);
   
   /* console.log(`Application is running on: ${await app.getUrl()}`); */

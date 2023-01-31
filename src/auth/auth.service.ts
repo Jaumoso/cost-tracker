@@ -5,17 +5,23 @@ import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-    constructor(private readonly userService: UserService, private jwtService: JwtService) { }
+    constructor(private userService: UserService, private jwtService: JwtService) { }
 
     async validateUser(email: string, password: string): Promise<any> {
         const user = await this.userService.findUser(email);
         if (!user) return null;
         const passwordValid = await bcrypt.compare(password, user.password)
         if (!user) {
-            throw new NotAcceptableException('User could not be found.');
+            throw new NotAcceptableException('No se ha podido encontrar el usuario');
         }
-        if (user && passwordValid) {
+        // ! comentado por seguridad
+/*         if (user && passwordValid) {
             return user;
+        } */
+        // ! Devuelve el usuario sin password ni email, por seguridad.
+        if (user && passwordValid) {
+            const { password, email, ... rest } = user;
+            return rest;
         }
         return null;
     }

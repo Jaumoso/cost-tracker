@@ -23,6 +23,9 @@ export class UserService {
 }
 
   async updateUser(userId: string, updateUserDto: UpdateUserDto): Promise<IUser> {
+    const saltOrRounds = 10;
+    const hashedPassword = await bcrypt.hash(updateUserDto.password, saltOrRounds);
+    updateUserDto.password = hashedPassword;
       const existingUser = await this.userModel.findByIdAndUpdate(userId, updateUserDto, { new: true });
     if (!existingUser) {
       throw new NotFoundException(`User #${userId} not found`);
@@ -46,13 +49,15 @@ export class UserService {
     return existingUser;
   }
 
+  // ######### LOGIN METHODS ############
   async findUser(email: string): Promise<IUser> {
-    const existingUser = this.userModel.findOne({username: email})
+    const existingUser = this.userModel.findOne({ email: email })
     if (!existingUser) {
       throw new NotFoundException(`User #${email} not found`);
     }
     return existingUser;
   }
+  // ###################################
 
   async deleteUser(userId: string): Promise<IUser> {
       const deletedUser = await this.userModel.findByIdAndDelete(userId);
