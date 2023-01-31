@@ -164,9 +164,7 @@ export class UserService {
     }
   }
 
-  login(formData: {username: string, password: string}): Observable<{token: string}> {
-    return this.http.post<{token: string}>(baseURL+'/login', formData);
-  }
+
 
 
 

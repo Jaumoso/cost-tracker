@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private userService: UserService,
-    private router: Router) { }
+    private router: Router,
+    private authService: AuthService) { }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -26,10 +28,10 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     const formData = this.loginForm.value;
-    this.userService.login(formData)
+    this.authService.login(formData)
       .subscribe(data => {
         localStorage.setItem('token', data.token);
-        this.router.navigate(['/']);
+        this.router.navigate(['/']); //takes us to main page
       },
         error => {
           this.error= error;
