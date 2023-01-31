@@ -1,5 +1,6 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res, UseGuards } from '@nestjs/common';
 import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CreateOperationDto } from 'src/operation/dto/create-operation.dto';
 import { UpdateOperationDto } from 'src/operation/dto/update-operation.dto';
 import { OperationService } from 'src/operation/operation.service';
@@ -9,6 +10,7 @@ export class OperationController {
 
   constructor(private readonly operationService: OperationService) { }
 
+  // ! BORRAR ANTES DE DESPLEGAR
   @Get()
   @ApiCreatedResponse({description: 'This function will get all the operations from the database.'})
     async getOperations(@Res() response) {
@@ -22,6 +24,7 @@ export class OperationController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('/:id')
   @ApiCreatedResponse({description: 'This function will get the operation passed as parameter from the database.'})
   async getOperation(@Res() response, @Param('id') operationId: string) {
@@ -36,6 +39,7 @@ export class OperationController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put('/new/:id')
   @ApiCreatedResponse({description: 'Update the data of a specific operation and change it into the database.'})
   async updateOperation(@Res() response,@Param('id') operationId: string, @Body() updateOperationDto: UpdateOperationDto) {
@@ -49,7 +53,7 @@ export class OperationController {
       return response.status(err.status).json(err.response);
     }
   }
-  
+  @UseGuards(JwtAuthGuard)
   @Post()
   @ApiCreatedResponse({description: 'Creation of a new operation and insertion into the database.'})
   async createOperation(@Res() response, @Body() createOperationDto: CreateOperationDto) {
@@ -68,6 +72,7 @@ export class OperationController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete('/delete/:id')
   @ApiCreatedResponse({description: 'This function will delete the operation passed as parameter from the database.'})
   async deleteOperation(@Res() response, @Param('id') operationId: string) {
@@ -82,6 +87,7 @@ export class OperationController {
     }
   }
 
+  // ! BORRAR ANTES DE DESPLEGAR
   @Get('/date/:date1/:date2')
   @ApiCreatedResponse({description: 'This function will get the Operations in a defined timeframe.'})
     async getOperationsByDate(@Res() response, @Param('date1') dateIntervalIni: string, @Param('date2') dateIntervalEnd: string,) {
