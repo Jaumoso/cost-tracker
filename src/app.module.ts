@@ -12,19 +12,16 @@ import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-<<<<<<< HEAD
-  MongooseModule.forRoot('mongodb+srv://CostTrackerJaumEzzi:38Ruh0nQ3PeJi16M@costtracker.hbqfwlv.mongodb.net/test',{dbName: 'cost-tracker'}),
-  // MongooseModule.forRoot('mongodb://localhost:27017',{dbName: 'cost-tracker'}),
+  // MongooseModule.forRoot('mongodb+srv://CostTrackerJaumEzzi:38Ruh0nQ3PeJi16M@costtracker.hbqfwlv.mongodb.net/test',{dbName: 'cost-tracker'}),
+  MongooseModule.forRoot('mongodb://localhost:27017',{dbName: 'cost-tracker'}),
   //  MongooseModule.forRoot('mongodb+srv://CostTrackerJaumEzzi:3MXUq6aeANqu5YkU@costtracker.hbqfwlv.mongodb.net/test',{dbName: 'cost-tracker'}), 
   // MongooseModule.forRoot('mongodb://localhost:27017',{dbName: 'cost-tracker'}),
-=======
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env',
     }),
   /* MongooseModule.forRoot( process.env.MONGO_STRING ,{dbName: 'cost-tracker'}), */
-  MongooseModule.forRoot('mongodb://localhost:27017',{dbName: 'cost-tracker'}),
->>>>>>> ba3ccade917f483f64cce165ace94d821a416daf
+  // MongooseModule.forRoot('mongodb://localhost:27017',{dbName: 'cost-tracker'}),
   GoogleModule,
   UserModule,
   AccountModule,

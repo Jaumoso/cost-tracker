@@ -27,7 +27,12 @@ export class UserService {
   }
 
   getUsers(): Observable<User[]> {
-    return this.http.get<{ userData: User[] }>(baseURL + 'user')
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+      })
+    };
+    return this.http.get<{ userData: User[] }>(baseURL + 'user', httpOptions)
       .pipe(
         map(userData => userData.userData)
       ).pipe(catchError(this.processHTTPMsgService.handleError));

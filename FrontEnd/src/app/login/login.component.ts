@@ -26,11 +26,15 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  onSubmit() {
+	onSubmit() {
+ 	   console.log("hola ");
     const formData = this.loginForm.value;
     this.authService.login(formData)
       .subscribe(data => {
-        localStorage.setItem('token', data.token);
+        const accessToken = data.access_token;
+        console.log("data ", data);
+        console.log("token ", accessToken);
+        localStorage.setItem('token', accessToken);
         this.router.navigate(['/']); //takes us to main page
       },
         error => {
@@ -40,4 +44,5 @@ export class LoginComponent implements OnInit {
       )
 
   }
+
 }

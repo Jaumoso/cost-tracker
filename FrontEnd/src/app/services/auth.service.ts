@@ -15,7 +15,13 @@ export class AuthService {
   constructor(private http: HttpClient,
     private processHTTPMsgService: ProcessHTTPMsgService) { }
 
-  login(formData: { username: string, password: string }): Observable<{ token: string }> {
-    return this.http.post<{ token: string }>(baseURL + '/login', formData);
+  login(formData: { username: string, password: string }): Observable<{ access_token: string }> {
+    console.log("formData: " , formData);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.post<{ access_token: string }>(baseURL + 'auth/login', formData, httpOptions);
   }
 }
