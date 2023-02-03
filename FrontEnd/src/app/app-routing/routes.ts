@@ -10,7 +10,8 @@ export const routes: Routes = [
     {path: "view1" , component: BillsComponent},
     {path: "view2" , component: BillsV2Component},
     {path: "view3" , component: BillsTableComponent},
-    {path: "home" , component: LoginComponent},
+    {path: "login" , component: LoginComponent},
+    {path: "logout" , component: LoginComponent},
     {path: 'home', redirectTo: '', pathMatch: 'full'},
     {path: 'operationDetail/:userID/:accountID/:operationID', component: OperationDetailV2Component}
 ];

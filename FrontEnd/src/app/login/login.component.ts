@@ -9,7 +9,7 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit  {
 
   loginForm: FormGroup;
   error: string;
@@ -35,7 +35,9 @@ export class LoginComponent implements OnInit {
         console.log("data ", data);
         console.log("token ", accessToken);
         localStorage.setItem('token', accessToken);
-        this.router.navigate(['/']); //takes us to main page
+        this.userService.setLogged(true);
+        this.router.navigate(['/view3']); //takes us to main page
+
       },
         error => {
           this.error= error;

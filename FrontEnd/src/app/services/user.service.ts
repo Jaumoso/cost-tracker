@@ -3,7 +3,7 @@ import { Account } from '../shared/Account';
 import { Operation } from '../shared/Operation';
 import { User } from '../shared/User';
 import { USERS } from '../shared/Users';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { delay, filter } from 'rxjs/operators';
 import { map,catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -15,6 +15,7 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
 })
 export class UserService {
 
+  logged$ = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient,
     private processHTTPMsgService: ProcessHTTPMsgService) { }
@@ -27,12 +28,7 @@ export class UserService {
   }
 
   getUsers(): Observable<User[]> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': `Bearer ${localStorage.getItem('access_token')}`
-      })
-    };
-    return this.http.get<{ userData: User[] }>(baseURL + 'user', httpOptions)
+    return this.http.get<{ userData: User[] }>(baseURL + 'user')
       .pipe(
         map(userData => userData.userData)
       ).pipe(catchError(this.processHTTPMsgService.handleError));
@@ -64,53 +60,12 @@ export class UserService {
     // return Promise.resolve(USERS.filter(user => (user._id === id))[0]);
   }
 
-  // getUserAccounts(id: string): Observable<Account[]> {
-  //   return this.http.get<{ existingUser: User}>(baseURL+'user/' + id)
-  //   .pipe(
-  //     map(userData => userData.existingUser.accounts)
-  //   );
-
-  //   // return of(USERS.filter(user => (user._id === id))[0].accounts)//with observables
-  //   //   .pipe(
-  //   //     delay(2000)
-  //   //   )
-  //   // return new Promise(resolve => {
-  //   //   setTimeout(()=> resolve(USERS.filter(user => (user._id === id))[0].accounts),2000);
-  //   // })
-  //   // return Promise.resolve(USERS.filter(user => (user._id === id))[0].accounts);
-  // }
-
-  // getAccountOperations(idUser: string, idAccount: string): Observable<Operation[]> {
-  //   return of(USERS.filter(user => (user._id === idUser))[0].accounts.filter(account => account._id === idAccount)[0].operations)
-  //     .pipe(
-  //       delay(2000)
-  //     )//with observables
-  //   // return new Promise(resolve => {
-  //   //   setTimeout(()=> resolve(USERS.filter(user => (user._id === idUser))[0].accounts.filter(account => account._id === idAccount)[0].operations),2000);
-  //   // })
-  //   // return Promise.resolve(USERS.filter(user => (user._id === idUser))[0].accounts.filter(account => account._id === idAccount)[0].operations);
-  // }
+  
+ 
 
 
-  //funcion que te devuelve el primer id libre
-  getMaxIdOper(userId: string, accountId: string): Observable<string> {
-    let maxId = '0';
-    USERS.filter(user => (user._id === userId))[0].accounts.filter(account => account._id === accountId)[0].operations.forEach(oper => { if (oper._id > maxId) maxId = oper._id });
-    USERS.filter(user => (user._id === userId))[0].accounts.filter(account => account._id === accountId)[0].operations.forEach(operation => console.log(operation._id));
-    console.log((+maxId) + 1);
-
-    return of(((+maxId) + 1).toString())//with observables
-      .pipe(
-        delay(2000)
-      )
-
-    // return new Promise(resolve => {
-    //   setTimeout(()=>resolve(((+maxId) + 1).toString()),2000);
-    // })
-    // return Promise.resolve(((+maxId) + 1).toString());
-  }
-
-
+  
+  
 
   getOperationsIds(accountId: string): Observable<string[]> {
     console.log("Account ID: ", accountId);
@@ -137,25 +92,12 @@ export class UserService {
         )
         .pipe(catchError(this.processHTTPMsgService.handleError));
         // console.log("function getAccount",accountId);
-    // return of(USERS.filter(usuario=> usuario._id ==userId)[0].accounts.filter(account => account._id == accountId)[0].operations.map(operation => operation._id));//with observables
-  }
-
-  // createOperation(user: User): Observable<User> {
-  //   const httpOptions = {
-  //     headers: new HttpHeaders({
-  //       'Content-Type': 'application/json'
-  //     })
-  //   };
-  //   return this.http.put<User>(baseURL + 'user/' + user._id, user, httpOptions);
-  //   // .pipe(catchError(this.processHTTPMsgService.handleError));
-  // }
-  //de J
-  addOperation(userId: string, accountId: string, operation: Operation) {
-    USERS.filter(user => (user._id === userId))[0].accounts.filter(account => account._id === accountId)[0].totalMoney += operation.amount;
-    USERS.filter(user => (user._id === userId))[0].accounts.filter(account => account._id === accountId)[0].operations.push(operation);
-    // USERS.filter(user => (user._id === userId))[0].accounts.filter(account => account._id === accountId)[0].operations.forEach(operation => console.log(operation));
-
-  }
+        // return of(USERS.filter(usuario=> usuario._id ==userId)[0].accounts.filter(account => account._id == accountId)[0].operations.map(operation => operation._id));//with observables
+      }
+      
+      
+      //de J
+      
   deleteOperation(operation: Operation): Observable<Operation> {
     return this.http.delete<Operation>(baseURL + 'operation/delete/' + operation._id)
     .pipe(catchError(this.processHTTPMsgService.handleError));
@@ -169,9 +111,17 @@ export class UserService {
     }
   }
 
+setLogged(logged:boolean){
+  // this.logged=logged;
+  this.logged$.next(logged);
 
+}
 
+getLogged():boolean{
+  // return this.logged;
+  return this.logged$.getValue();
 
+}
 
   //j edited and modified 
 
@@ -225,3 +175,63 @@ export class UserService {
 
 
 }
+
+ // getUserAccounts(id: string): Observable<Account[]> {
+  //   return this.http.get<{ existingUser: User}>(baseURL+'user/' + id)
+  //   .pipe(
+  //     map(userData => userData.existingUser.accounts)
+  //   );
+
+  //   // return of(USERS.filter(user => (user._id === id))[0].accounts)//with observables
+  //   //   .pipe(
+  //   //     delay(2000)
+  //   //   )
+  //   // return new Promise(resolve => {
+  //   //   setTimeout(()=> resolve(USERS.filter(user => (user._id === id))[0].accounts),2000);
+  //   // })
+  //   // return Promise.resolve(USERS.filter(user => (user._id === id))[0].accounts);
+  // }
+
+  // getAccountOperations(idUser: string, idAccount: string): Observable<Operation[]> {
+  //   return of(USERS.filter(user => (user._id === idUser))[0].accounts.filter(account => account._id === idAccount)[0].operations)
+  //     .pipe(
+  //       delay(2000)
+  //     )//with observables
+  //   // return new Promise(resolve => {
+  //   //   setTimeout(()=> resolve(USERS.filter(user => (user._id === idUser))[0].accounts.filter(account => account._id === idAccount)[0].operations),2000);
+  //   // })
+  //   // return Promise.resolve(USERS.filter(user => (user._id === idUser))[0].accounts.filter(account => account._id === idAccount)[0].operations);
+  // }
+    // createOperation(user: User): Observable<User> {
+  //   const httpOptions = {
+  //     headers: new HttpHeaders({
+  //       'Content-Type': 'application/json'
+  //     })
+  //   };
+  //   return this.http.put<User>(baseURL + 'user/' + user._id, user, httpOptions);
+  //   // .pipe(catchError(this.processHTTPMsgService.handleError));
+  // }
+
+  //funcion que te devuelve el primer id libre
+//   getMaxIdOper(userId: string, accountId: string): Observable<string> {
+//     let maxId = '0';
+//     USERS.filter(user => (user._id === userId))[0].accounts.filter(account => account._id === accountId)[0].operations.forEach(oper => { if (oper._id > maxId) maxId = oper._id });
+//     USERS.filter(user => (user._id === userId))[0].accounts.filter(account => account._id === accountId)[0].operations.forEach(operation => console.log(operation._id));
+//     console.log((+maxId) + 1);
+
+//     return of(((+maxId) + 1).toString())//with observables
+//       .pipe(
+//         delay(2000)
+//       )
+
+//     // return new Promise(resolve => {
+//     //   setTimeout(()=>resolve(((+maxId) + 1).toString()),2000);
+//     // })
+//     // return Promise.resolve(((+maxId) + 1).toString());
+//   }
+// addOperation(userId: string, accountId: string, operation: Operation) {
+// USERS.filter(user => (user._id === userId))[0].accounts.filter(account => account._id === accountId)[0].totalMoney += operation.amount;
+// USERS.filter(user => (user._id === userId))[0].accounts.filter(account => account._id === accountId)[0].operations.push(operation);
+// // USERS.filter(user => (user._id === userId))[0].accounts.filter(account => account._id === accountId)[0].operations.forEach(operation => console.log(operation));
+
+// }

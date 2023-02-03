@@ -1,17 +1,18 @@
-<mat-toolbar color="primary"> 
-  <a mat-button routerLink="/home" routerLinkActive="active" ><span class="fa fa-home fa-lg"></span> home</a>
+<mat-toolbar color="primary">
+  <a mat-button routerLink="/home" routerLinkActive="active"><span class="fa fa-home fa-lg"></span> home</a>
   <a mat-button routerLink="/view1" routerLinkActive="active"><span class="fa fa-info fa-lg"></span> View1</a>
   <a mat-button routerLink="/view2" routerLinkActive="active"><span class="fa fa-list fa-lg"></span> View2</a>
   <a mat-button routerLink="/view3" routerLinkActive="active"><span class="fa fa-address-card fa-lg"></span> View3</a>
+  <a mat-button routerLink="/logout" routerLinkActive="active" *ngIf="logged" class="logout-button" (click)="logOut()">
+    <span class="fa fa-sign-out fa-lg"></span> LogOut
+  </a>
+  <a mat-button routerLink="/login" routerLinkActive="active" *ngIf="!logged" class="logout-button">
+    <span class="fa fa-sign-in fa-lg"></span> LogIn
+  </a>
 </mat-toolbar>
-<div class="container jumbotron"
-    fxLayout="row"
-    fxLayout.sm="column" 
-    fxLayout.xs="column" 
-    fxLayoutAlign.xs="start center"
-    fxLayoutAlign.sm="start center" 
-    fxLayoutAlign.gt-sm="center center" 
-    fxLayoutGap="10px">
+<div class="container jumbotron" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column"
+  fxLayoutAlign.xs="start center" fxLayoutAlign.sm="start center" fxLayoutAlign.gt-sm="center center"
+  fxLayoutGap="10px">
 
   <div fxFlex fxFlex.gt-sm="50%">
     <h1>Cost Tracker</h1>
