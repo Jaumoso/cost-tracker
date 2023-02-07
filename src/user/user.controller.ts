@@ -66,7 +66,7 @@ export class UserController {
   }
 
   // ! BORRAR ANTES DE DESPLEGAR
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Get()
   @ApiCreatedResponse({
     description: 'This function will get all the accounts from the database.',

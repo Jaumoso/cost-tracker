@@ -14,6 +14,7 @@ export class BillsV2Component implements OnInit {
 
   users: User[];
   user: User;
+  userId: string;
 
   constructor(private userService: UserService,
     public dialog: MatDialog) { }
@@ -21,12 +22,17 @@ export class BillsV2Component implements OnInit {
   ngOnInit() {
     
     setTimeout(() => {
-      this.userService.getUsers().subscribe(
-        usuarios => { this.users = usuarios;
-        console.log("here we go: ",usuarios);}
-      );
-      
+      this.userId= this.userService.getuserId();
+      this.userService.getUser(this.userId).subscribe(usario => this.user = usario);
     }, 500);
+
+    // setTimeout(() => {
+    //   this.userService.getUsers().subscribe(
+    //     usuarios => { this.users = usuarios;
+    //     console.log("here we go: ",usuarios);}
+    //   );
+      
+    // }, 500);
     // this.userService.getUsers().then(usuarios => this.users = usuarios);
     // this.users = this.userService.getUsers();
 

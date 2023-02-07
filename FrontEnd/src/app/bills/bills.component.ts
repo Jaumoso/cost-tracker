@@ -13,6 +13,8 @@ import { Operation } from '../shared/Operation';
 export class BillsComponent implements OnInit {
 
   users: User[];
+  user: User;
+  userId: string;
   accounts: Account[];
   acc: Account;
   accOP: Account;
@@ -22,7 +24,10 @@ export class BillsComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.userService.getUsers().subscribe(usuarios => this.users = usuarios);
+    this.userId= this.userService.getuserId();
+    this.userService.getUser(this.userId).subscribe(usario => this.user = usario);
+
+    // this.userService.getUsers().subscribe(usuarios => this.users = usuarios);
     // this.userService.getUsers().then(usuarios => this.users=usuarios);
     // this.users = this.userService.getUsers();
 

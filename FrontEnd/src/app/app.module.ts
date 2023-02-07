@@ -35,6 +35,7 @@ import { AddBillFormComponent } from './add-bill-form/add-bill-form.component';
 import { baseURL } from './shared/baseurl';
 import { LoginComponent } from './login/login.component';
 import { TokenInterceptor } from './shared/TokenInterceptor ';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,8 @@ import { TokenInterceptor } from './shared/TokenInterceptor ';
   ],
   entryComponents: [AddBillFormComponent],
   providers: [
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService,
     UserService,
     { provide: 'baseURL', useValue: baseURL },
     {

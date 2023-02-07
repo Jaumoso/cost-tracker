@@ -12,8 +12,8 @@ import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-  // MongooseModule.forRoot('mongodb+srv://CostTrackerJaumEzzi:38Ruh0nQ3PeJi16M@costtracker.hbqfwlv.mongodb.net/test',{dbName: 'cost-tracker'}),
-  MongooseModule.forRoot('mongodb://localhost:27017',{dbName: 'cost-tracker'}),
+  MongooseModule.forRoot('mongodb+srv://CostTrackerJaumEzzi:38Ruh0nQ3PeJi16M@costtracker.hbqfwlv.mongodb.net/test',{dbName: 'cost-tracker'}),
+  // MongooseModule.forRoot('mongodb://localhost:27017',{dbName: 'cost-tracker'}),
   //  MongooseModule.forRoot('mongodb+srv://CostTrackerJaumEzzi:3MXUq6aeANqu5YkU@costtracker.hbqfwlv.mongodb.net/test',{dbName: 'cost-tracker'}), 
   // MongooseModule.forRoot('mongodb://localhost:27017',{dbName: 'cost-tracker'}),
     ConfigModule.forRoot({

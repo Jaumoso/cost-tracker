@@ -17,6 +17,7 @@ export class BillsTableComponent implements OnInit {
   users: User[];
   user: User;
   operation2: Operation;
+  userId: string;
 
   displayedColumns: string[] = ['name', 'email'];
   constructor(private userService: UserService,
@@ -26,11 +27,14 @@ export class BillsTableComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.getUsers().subscribe(usuarios => { this.users = usuarios; console.log(this.users) });
+    
+    this.userId= this.userService.getuserId();
+    this.userService.getUser(this.userId).subscribe(usario => this.user = usario);
+    
+    // this.userService.getUsers().subscribe(usuarios => { this.users = usuarios; console.log(this.users) });
     // this.user= this.users.filter(user => user)[0]; 
     // console.log(this.user);
-    this.userService.getUser('63a175d0fab382593f7d265c').subscribe(usario => this.user = usario);
-
+    // this.userService.getUser('63a175d0fab382593f7d265c').subscribe(usario => this.user = usario);
     // this.userService.getUsers().then(usuarios => this.users = usuarios);
     // this.userService.getUser('1').then(usario => this.user = usario);
     // this.users = this.userService.getUsers();

@@ -3,6 +3,7 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { AuthService } from '../services/auth.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-login',
@@ -35,6 +36,9 @@ export class LoginComponent implements OnInit  {
         console.log("data ", data);
         console.log("token ", accessToken);
         localStorage.setItem('token', accessToken);
+        // const helper = new JwtHelperService();
+        // const decodedToken = helper.decodeToken(accessToken);
+        // console.log("decodedToken: ", decodedToken.sub);
         this.userService.setLogged(true);
         this.router.navigate(['/view3']); //takes us to main page
 
